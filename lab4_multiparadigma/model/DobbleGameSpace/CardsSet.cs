@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * Busca representar un conjunto de cartas (ICardsSet), respetando como
      *  funcionan los conjuntos.
      * @author Matias Figueroa Contreras
      */
-    internal class CardsSet: ICardsSet
+    internal class CardsSet : ICardsSet
     {
         /**
         * El conjunto de cartas representado en un Arreglo. Creado en primera
@@ -26,7 +26,7 @@ namespace model
         */
         public List<Card> getCards()
         {
-            List<Card> cSCopy = new(this.cardsSet);
+            List<Card> cSCopy = new(cardsSet);
             return cSCopy;
         }
 
@@ -41,7 +41,7 @@ namespace model
         {
             if (isCardsSet(newCards))
             {
-                this.cardsSet = new(newCards);
+                cardsSet = new(newCards);
             }
         }
 
@@ -71,7 +71,7 @@ namespace model
         {
             if (!contains(card))
             {
-                this.cardsSet.Add(card);
+                cardsSet.Add(card);
             }
         }
 
@@ -83,7 +83,7 @@ namespace model
         */
         public Card nthCard(int n)
         {
-            return this.cardsSet[n - 1];
+            return cardsSet[n - 1];
         }
 
         /**
@@ -93,7 +93,7 @@ namespace model
        */
         public int numCards()
         {
-            return this.cardsSet.Count;
+            return cardsSet.Count;
         }
 
         /**
@@ -131,7 +131,7 @@ namespace model
         */
         public void remove(int n)
         {
-            this.cardsSet.RemoveAt(n - 1);
+            cardsSet.RemoveAt(n - 1);
         }
 
         /**
@@ -156,7 +156,7 @@ namespace model
         */
         public void clear()
         {
-            this.cardsSet.Clear();
+            cardsSet.Clear();
         }
 
         /**
@@ -184,7 +184,7 @@ namespace model
         * @param element elemento a contar.
         * @return numero de apariciones del elmento dado.
         */
-        public int elementOccurrences(String element)
+        public int elementOccurrences(string element)
         {
             int count = 0;
             for (int i = 1; i <= numCards(); i++)
@@ -211,7 +211,7 @@ namespace model
                 Card nCard = nthCard(n);
                 remove(n);
                 int newN = (int)rand.NextInt64(numCards());
-                this.cardsSet.Insert(newN, nCard);
+                cardsSet.Insert(newN, nCard);
             }
         }
 
@@ -223,9 +223,9 @@ namespace model
         * @param object objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public override bool Equals(Object? o)
+        public override bool Equals(object? o)
         {
-            if (o != null && o.GetType().Equals(this.GetType()))
+            if (o != null && o.GetType().Equals(GetType()))
             {
                 CardsSet cS = (CardsSet)o;
                 if (cS.numCards() == numCards())
@@ -249,13 +249,13 @@ namespace model
         * </p>
         * @return String en representacion del conjunto de cartas.
         */
-   
-        public override String ToString()
+
+        public override string ToString()
         {
-            String str = "";
+            string str = "";
             for (int i = 1; i <= numCards(); i++)
             {
-                String n = i + ": ";
+                string n = i + ": ";
                 str += "Card n" + n + nthCard(i).ToString() + "\n";
             }
             return str;

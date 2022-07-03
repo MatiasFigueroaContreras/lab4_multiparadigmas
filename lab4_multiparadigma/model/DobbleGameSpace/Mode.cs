@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * Interfaz que establece los metodos que tiene que proporcionar un modo de
@@ -19,7 +19,7 @@ namespace model
         * @param dGame juego Dobble, por si necesita informacion de este.
         * @return lista con las opciones de juego.
         */
-        public String[] playsOptions(DobbleGame dGame);
+        public string[] playsOptions(DobbleGame dGame);
 
         /**
         * <p> Permite realizar una jugada.
@@ -28,7 +28,7 @@ namespace model
         * @param option opcion para realizar la jugada.
         * @return estado luego de la jugada realizada.
         */
-        public String? play(DobbleGame dGame, String option);
+        public string play(DobbleGame dGame, string option);
 
         /**
         * <p> Permite realizar una jugada.
@@ -38,7 +38,7 @@ namespace model
         * @param data informacion extra que es necesaria para realizar la jugada.
         * @return estado luego de la jugada realizada.
         */
-        public String? play(DobbleGame dGame, String option, String[] data);
+        public string play(DobbleGame dGame, string option, string[] data);
 
         /**
         * <p> Inicializa el juego, con la construccion que sea necesaria.
@@ -47,21 +47,21 @@ namespace model
         *               inicializacion del juego.
         * @return estado luego de iniciar el juego.
         */
-        public String start(DobbleGame dG);
+        public string start(DobbleGame dG);
 
         /**
         * <p> Getter.
         * </p>
         * @return Version del modo de juego.
         */
-        public String getVersionModeName();
+        public string getVersionModeName();
 
         /**
         * <p> Getter.
         * </p>
         * @return nombre del modo de juego.
         */
-        public String getModeName();
+        public string getModeName();
 
         /**
         * <p> Consulta si el modo de juego segun una jugada y el estado del juego
@@ -72,7 +72,7 @@ namespace model
         * @return nombre de la informacion extra necesitada, o null si no se 
         *           necesita informacion extra.
         */
-        public String? extraDataNeeded(String status, String option);
+        public string? extraDataNeeded(string status, string option);
 
         /**
         * <p> Getter.
@@ -110,6 +110,6 @@ namespace model
         * @param object objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public bool Equals(Object? o);
+        public bool Equals(object? o);
     }
 }

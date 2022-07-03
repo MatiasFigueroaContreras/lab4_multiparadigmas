@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * Interfaz que busca establecer los metodos que necesita conjunto de cartas, 
@@ -100,7 +100,7 @@ namespace model
         * @param element elemento a contar.
         * @return numero de apariciones del elmento dado.
         */
-        public int elementOccurrences(String element);
+        public int elementOccurrences(string element);
 
         /**
         * <p> Revuelve las cartas.
@@ -114,13 +114,13 @@ namespace model
         * @param obj objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public bool Equals(Object? obj);
+        public bool Equals(object? obj);
 
         /**
         * <p> Pasa la representacion del Conjunto de cartas a String.
         * </p>
         * @return String en representacion del conjunto de cartas.
         */
-        public String ToString();
+        public string ToString();
     }
 }

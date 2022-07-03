@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * Representa el area de juego, en donde se representa el mazo de cartas Dobble 
@@ -44,9 +44,9 @@ namespace model
         * @param maxC maximo de cartas que contendra el mazo Dobble a crear.
         * @return el objeto GameArea creado.
         */
-        public GameArea(List<String> elements, int numE, int maxC)
+        public GameArea(List<string> elements, int numE, int maxC)
         {
-            this.dobbleSet = new Dobble(elements, numE, maxC);
+            dobbleSet = new Dobble(elements, numE, maxC);
         }
 
         /**
@@ -57,8 +57,8 @@ namespace model
         */
         public void addDobbleCardInPlay(int n)
         {
-            this.cardsInPlay.add(this.dobbleSet.nthCard(n));
-            this.dobbleSet.removeCard(n);
+            cardsInPlay.add(dobbleSet.nthCard(n));
+            dobbleSet.removeCard(n);
         }
 
 
@@ -86,11 +86,11 @@ namespace model
         */
         public void backCardsInPlay()
         {
-            for (int i = 1; i <= this.cardsInPlay.numCards(); i++)
+            for (int i = 1; i <= cardsInPlay.numCards(); i++)
             {
-                this.dobbleSet.addCard(this.cardsInPlay.nthCard(i));
+                dobbleSet.addCard(cardsInPlay.nthCard(i));
             }
-            this.cardsInPlay.clear();
+            cardsInPlay.clear();
         }
 
         /**
@@ -99,9 +99,9 @@ namespace model
         * @param element elemento a contar.
         * @return numero de apariciones del elmento dado.
         */
-        public int elementOccurrencesCardsInPlay(String element)
+        public int elementOccurrencesCardsInPlay(string element)
         {
-            return this.cardsInPlay.elementOccurrences(element);
+            return cardsInPlay.elementOccurrences(element);
         }
 
         /**
@@ -111,7 +111,7 @@ namespace model
         */
         public Dobble getDobbleSet()
         {
-            return this.dobbleSet;
+            return dobbleSet;
         }
 
         /**
@@ -121,7 +121,7 @@ namespace model
         */
         public CardsSet getCardsInPlay()
         {
-            return this.cardsInPlay;
+            return cardsInPlay;
         }
 
         /**
@@ -141,7 +141,7 @@ namespace model
         */
         public void setCardsInPlay(CardsSet cards)
         {
-            this.cardsInPlay = cards;
+            cardsInPlay = cards;
         }
 
         /**
@@ -149,9 +149,9 @@ namespace model
         * </p>
         * @return String en representacion de las cartas en juego.
         */
-        public String cardsInPlayToString()
+        public string cardsInPlayToString()
         {
-            return this.cardsInPlay.ToString();
+            return cardsInPlay.ToString();
         }
 
         /**
@@ -172,9 +172,9 @@ namespace model
         * @param n indice (nth) a buscar en el mazo.
         * @return el nth elemento buscado en su representacion de String.
         */
-        public String nthElement(int n)
+        public string nthElement(int n)
         {
-            return this.dobbleSet.nthElement(n);
+            return dobbleSet.nthElement(n);
         }
 
         /**
@@ -184,7 +184,7 @@ namespace model
         */
         public int numElements()
         {
-            return this.dobbleSet.numElements();
+            return dobbleSet.numElements();
         }
 
         /**
@@ -194,7 +194,7 @@ namespace model
         */
         public int numCardsInPlay()
         {
-            return this.cardsInPlay.numCards();
+            return cardsInPlay.numCards();
         }
 
         /**
@@ -204,7 +204,7 @@ namespace model
         */
         public int numDobbleCards()
         {
-            return this.dobbleSet.numCards();
+            return dobbleSet.numCards();
         }
 
         /**
@@ -213,7 +213,7 @@ namespace model
         */
         public void clearCardsInPlay()
         {
-            this.cardsInPlay.clear();
+            cardsInPlay.clear();
         }
 
         /**
@@ -224,12 +224,12 @@ namespace model
         * @param object objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public override bool Equals(Object? o)
+        public override bool Equals(object? o)
         {
-            if (o != null && o.GetType().Equals(this.GetType()))
+            if (o != null && o.GetType().Equals(GetType()))
             {
                 GameArea gA = (GameArea)o;
-                return this.cardsInPlay.Equals(gA.cardsInPlay) && this.dobbleSet.Equals(gA.cardsInPlay);
+                return cardsInPlay.Equals(gA.cardsInPlay) && dobbleSet.Equals(gA.cardsInPlay);
             }
             return false;
         }

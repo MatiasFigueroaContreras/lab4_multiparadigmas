@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * Representa un juego dobble, el cual posee un control de jugadores, un area
@@ -13,22 +13,22 @@ namespace model
      *  estado que permite saber en que se encuentra el juego y controlar este.
      * @author Matias Figueroa Contreras
      */
-    internal class DobbleGame: IDobbleGame
+    public class DobbleGame : IDobbleGame
     {
         /**
         * Nombre que se le dara al juego.
         */
-        private String name;
+        private string name;
 
         /**
         * Area de juego que contendra el mazo Dobble y las cartas en juego.
         */
-        protected GameArea gameArea;
+        private GameArea gameArea;
 
         /**
         * Control de jugadores, gestiona todo lo relativo a estos.
         */
-        protected PlayersGameControl playersGameControl;
+        private PlayersGameControl playersGameControl;
 
         /**
         * Modo de juego, gestiona las jugadas y la asignacion de puntos entre otros.
@@ -39,7 +39,7 @@ namespace model
         * Estado en el que se encuentra el juego, inicialmente esperando el inicio
         *   de este.
         */
-        private String status = "Esperando inicio del juego";
+        private string status = "Esperando inicio del juego";
 
         /**
         * <p> Constructor, asigna el nombre del juego, el maximo de jugadores
@@ -58,23 +58,23 @@ namespace model
         *               del area de juego.
         * @return el objeto DobbleGame creado.
         */
-        public DobbleGame(String gameName, int maxP, String mode, List<String> elements, int numE, int maxC)
+        public DobbleGame(string gameName, int maxP, string mode, List<string> elements, int numE, int maxC)
         {
-            Mode m = stringToMode(mode);
+            Mode? m = stringToMode(mode);
             if (m == null)
             {
-                return;
+                throw new DobbleGameException(400, "Modo de juego no disponible.");
             }
             if (maxP <= m.getMaxPlayers() && maxP >= m.getMinPlayers())
             {
-                this.playersGameControl = new PlayersGameControl(maxP + m.getExtraPlayers());
+                playersGameControl = new PlayersGameControl(maxP + m.getExtraPlayers());
             }
             else
             {
-                this.playersGameControl = new PlayersGameControl(m.getMaxPlayers() + m.getExtraPlayers());
+                throw new DobbleGameException(400, "El maximo de jugadores a registrar no concuerda con el modo de juego escogido.");
             }
-            this.name = gameName;
-            this.gameArea = new GameArea(elements, numE, maxC);
+            name = gameName;
+            gameArea = new GameArea(elements, numE, maxC);
             this.mode = m;
         }
 
@@ -86,7 +86,7 @@ namespace model
         * @return el objeto Mode creado si se encuentra dentro de los disponibles,
         *           en otro caso null.
         */
-        private Mode stringToMode(String mode)
+        private Mode? stringToMode(string mode)
         {
             switch (mode)
             {
@@ -119,14 +119,16 @@ namespace model
         * @return true si se pudo iniciar el juego, false si el juego ya estaba
         *           iniciado o no cumplia los requisitos.
         */
-        public bool start()
+        public void start()
         {
-            if (this.status.Equals("Esperando inicio del juego") && this.playersGameControl.getTotalPlayers() >= this.mode.getMinPlayers())
+            if (status.Equals("Esperando inicio del juego") && playersGameControl.getTotalPlayers() >= mode.getMinPlayers())
             {
-                this.status = mode.start(this);
-                return true;
+                status = mode.start(this);
             }
-            return false;
+            else
+            {
+                throw new DobbleGameException(500, "Juego ya iniciado, o terminado.");
+            }
         }
 
         /**
@@ -138,22 +140,18 @@ namespace model
         * @return true si la jugada pudo ser efectuada, false sino pudo ser 
         *           efectuada.
         */
-        public bool play(String option)
+        public void play(string option)
         {
-            if (!this.status.Equals("Juego Terminado") && !this.status.Equals("Esperando inicio del juego"))
+            if (status.Equals("Juego Terminado"))
             {
-                String newStatus = mode.play(this, option);
-                if (newStatus == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    this.status = newStatus;
-                    return true;
-                }
+                throw new DobbleGameException(501, "El juego ya ha finalizado.");
             }
-            return false;
+            if (status.Equals("Esperando inicio del juego"))
+            {
+                throw new DobbleGameException(502, "Juego aun no comenzado.");
+            }
+            string newStatus = mode.play(this, option);
+            status = newStatus;
         }
 
         /**
@@ -169,22 +167,18 @@ namespace model
         * @return true si la jugada pudo ser efectuada, false sino pudo ser 
         *           efectuada.
         */
-        public bool play(String option, String[] data)
+        public void play(string option, string[] data)
         {
-            if (!this.status.Equals("Juego Terminado") && !this.status.Equals("Esperando inicio del juego"))
+            if (status.Equals("Juego Terminado"))
             {
-                String newStatus = mode.play(this, option, data);
-                if (newStatus == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    this.status = newStatus;
-                    return true;
-                }
+                throw new DobbleGameException(501, "El juego ya ha finalizado.");
             }
-            return false;
+            if (status.Equals("Esperando inicio del juego"))
+            {
+                throw new DobbleGameException(502, "Juego aun no comenzado.");
+            }
+            string newStatus = mode.play(this, option, data);
+            status = newStatus;
         }
 
         /**
@@ -193,7 +187,7 @@ namespace model
         */
         public void finish()
         {
-            this.status = "Juego Terminado";
+            status = "Juego Terminado";
         }
 
         /**
@@ -202,12 +196,12 @@ namespace model
         */
         internal void nextTurn()
         {
-            this.playersGameControl.nextTurn();
+            playersGameControl.nextTurn();
         }
 
         internal void addCardsInPlayCurrentPlayerTurn()
         {
-            this.playersGameControl.addCardsCurrentPlayerTurn(this.gameArea.getCardsInPlay());
+            playersGameControl.addCardsCurrentPlayerTurn(gameArea.getCardsInPlay());
         }
 
         /**
@@ -217,9 +211,9 @@ namespace model
         * @param cards cartas a agregar.
         * @param name nombre del jugador a agregar las cartas.
         */
-        internal void addCardsInPlayPlayer(String name)
+        internal void addCardsInPlayPlayer(string name)
         {
-            this.playersGameControl.addCardsPlayer(this.gameArea.getCardsInPlay(), name);
+            playersGameControl.addCardsPlayer(gameArea.getCardsInPlay(), name);
         }
 
         /**
@@ -230,7 +224,7 @@ namespace model
         */
         internal void addScoreCurrentPlayerTurn(int score)
         {
-            this.playersGameControl.addScoreCurrentPlayerTurn(score);
+            playersGameControl.addScoreCurrentPlayerTurn(score);
         }
 
         /**
@@ -240,9 +234,9 @@ namespace model
         * @param score puntaje a sumar.
         * @param name nombre del jugador a sumar el puntaje.
         */
-        internal void addScorePlayer(int score, String name)
+        internal void addScorePlayer(int score, string name)
         {
-            this.playersGameControl.addScorePlayer(score, name);
+            playersGameControl.addScorePlayer(score, name);
         }
 
         /**
@@ -254,7 +248,7 @@ namespace model
         */
         internal void addDobbleCardsInPlay(int start, int end)
         {
-            this.gameArea.addDobbleCardsInPlay(start, end);
+            gameArea.addDobbleCardsInPlay(start, end);
         }
 
         /**
@@ -264,7 +258,7 @@ namespace model
         */
         internal void backCardsInPlay()
         {
-            this.gameArea.backCardsInPlay();
+            gameArea.backCardsInPlay();
         }
 
         /**
@@ -274,7 +268,7 @@ namespace model
         */
         internal void clearCardsInPlay()
         {
-            this.gameArea.clearCardsInPlay();
+            gameArea.clearCardsInPlay();
         }
 
         /**
@@ -284,9 +278,9 @@ namespace model
         * @param element elemento a contar.
         * @return numero de apariciones del elmento dado.
         */
-        internal int elementOccurrencesCardsInPlay(String element)
+        internal int elementOccurrencesCardsInPlay(string element)
         {
-            return this.gameArea.elementOccurrencesCardsInPlay(element);
+            return gameArea.elementOccurrencesCardsInPlay(element);
         }
 
         /**
@@ -296,9 +290,9 @@ namespace model
         * @param n indice (nth) a buscar en el mazo.
         * @return el nth elemento buscado en su representacion de String.
         */
-        internal String nthElement(int n)
+        internal string nthElement(int n)
         {
-            return this.gameArea.nthElement(n);
+            return gameArea.nthElement(n);
         }
 
         /**
@@ -309,7 +303,7 @@ namespace model
         */
         internal int numElements()
         {
-            return this.gameArea.numElements();
+            return gameArea.numElements();
         }
 
         /**
@@ -320,7 +314,7 @@ namespace model
         */
         internal int numCardsInPlay()
         {
-            return this.gameArea.numCardsInPlay();
+            return gameArea.numCardsInPlay();
         }
 
         /**
@@ -331,7 +325,7 @@ namespace model
         */
         internal int numDobbleCards()
         {
-            return this.gameArea.numDobbleCards();
+            return gameArea.numDobbleCards();
         }
 
         /**
@@ -340,9 +334,9 @@ namespace model
         * </p>
         * @param name nombre del jugador a registrar.
         */
-        public void register(String name)
+        public void register(string name)
         {
-            playersGameControl.addPlayer(name, this.mode.getExtraPlayers());
+            playersGameControl.addPlayer(name, mode.getExtraPlayers());
         }
 
         /**
@@ -352,7 +346,7 @@ namespace model
         * </p>
         * @param name nombre del jugador a registrar.
         */
-        internal void registerExtra(String name)
+        internal void registerExtra(string name)
         {
             playersGameControl.addPlayer(name);
         }
@@ -362,7 +356,7 @@ namespace model
         * </p>
         * @return nombre del jugador al cual le toca jugar.
         */
-        public String whoseTurnIsIt()
+        public string whoseTurnIsIt()
         {
             return playersGameControl.getPlayerTurn();
         }
@@ -373,7 +367,7 @@ namespace model
         * @param name nombre del jugador que se desea saber el puntaje.
         * @return puntaje del jugador consultado.
         */
-        public int getScore(String name)
+        public int getScore(string name)
         {
             return playersGameControl.getPlayerScore(name);
         }
@@ -383,9 +377,9 @@ namespace model
         * </p>
         * @return el nombre del modo de juego.
         */
-        public String getNameOfMode()
+        public string getNameOfMode()
         {
-            return this.mode.getModeName();
+            return mode.getModeName();
         }
 
         /**
@@ -393,9 +387,9 @@ namespace model
         * </p>
         * @return la version del modo de juego.
         */
-        public String getVersionMode()
+        public string getVersionMode()
         {
-            return this.mode.getVersionModeName();
+            return mode.getVersionModeName();
         }
 
         /**
@@ -407,9 +401,9 @@ namespace model
         * @return nombre de la informacion extra necesitada, o null si no se 
         *           necesita informacion extra.
         */
-        public String getExtraDataNeeded(String option)
+        public string? getExtraDataNeeded(string option)
         {
-            return this.mode.extraDataNeeded(this.status, option);
+            return mode.extraDataNeeded(status, option);
         }
 
         /**
@@ -419,7 +413,7 @@ namespace model
         */
         public int getNumExtraDataNeded()
         {
-            return this.mode.numExtraDataNeeded(this);
+            return mode.numExtraDataNeeded(this);
         }
 
         /**
@@ -427,9 +421,9 @@ namespace model
         * </p>
         * @return copia del nombre del juego.
         */
-        public String getGameName()
+        public string getGameName()
         {
-            String gameNameCopy = new String(this.name);
+            string gameNameCopy = new string(name);
             return gameNameCopy;
         }
 
@@ -438,9 +432,9 @@ namespace model
         * </p>
         * @return copia del estado del juego.
         */
-        public String getStatus()
+        public string getStatus()
         {
-            String statusCopy = new String(this.status);
+            string statusCopy = new string(status);
             return statusCopy;
         }
 
@@ -449,9 +443,9 @@ namespace model
         * </p>
         * @param newStatus nuevo estado a setear.
         */
-        internal void setStatus(String newStatus)
+        internal void setStatus(string newStatus)
         {
-            this.status = new String(newStatus);
+            status = new string(newStatus);
         }
 
         /**
@@ -461,7 +455,7 @@ namespace model
         */
         public bool isFinished()
         {
-            return this.status.Equals("Juego Terminado");
+            return status.Equals("Juego Terminado");
         }
 
         /**
@@ -469,9 +463,9 @@ namespace model
         * </p>
         * @return cartas en juego representadas en string.
         */
-        public String cardsInPlayString()
+        public string cardsInPlayString()
         {
-            return this.gameArea.cardsInPlayToString();
+            return gameArea.cardsInPlayToString();
         }
 
         /**
@@ -480,16 +474,14 @@ namespace model
         * @return opciones de juego segun el modo activo, si es que el juego
         *           no ha terminado, caso contrario ninguna opcion de juego.
         */
-        public String[] getPlaysOptions()
+        public string[] getPlaysOptions()
         {
-            if (!this.status.Equals("Juego Terminado"))
+            if (status.Equals("Juego Terminado"))
             {
-                return this.mode.playsOptions(this);
+                throw new DobbleGameException(501, "El juego ya ha finalizado.");
             }
-            else
-            {
-                return new String[0];
-            }
+
+            return mode.playsOptions(this);
         }
 
         /**
@@ -497,13 +489,14 @@ namespace model
         * </p>
         * @return ganadores del juego representado en string.
         */
-        public String? getWinners()
+        public string? getWinners()
         {
-            if (this.status.Equals("Juego Terminado"))
+            if (status.Equals("Juego Terminado"))
             {
-                return this.playersGameControl.getWinners().ToString();
+                return playersGameControl.getWinners().ToString();
             }
-            return "No Disponible";
+
+            throw new DobbleGameException(503, "El juego aun no ha terminado.");
         }
 
         /**
@@ -511,13 +504,14 @@ namespace model
         * </p>
         * @return perdedores del juego representado en string.
         */
-        public String? getLosers()
+        public string? getLosers()
         {
-            if (this.status.Equals("Juego Terminado"))
+            if (status.Equals("Juego Terminado"))
             {
-                return this.playersGameControl.getLosers().ToString();
+                return playersGameControl.getLosers().ToString();
             }
-            return "No Disponible";
+
+            throw new DobbleGameException(503, "El juego aun no ha terminado.");
         }
 
         /**
@@ -525,9 +519,9 @@ namespace model
         * </p>
         * @return jugadores registrados en su representacion de String.
         */
-        public String registeredPlayers()
+        public string registeredPlayers()
         {
-            return this.playersGameControl.ToString();
+            return playersGameControl.ToString();
         }
 
         /**
@@ -538,12 +532,12 @@ namespace model
         * @param object objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public override bool Equals(Object? o)
+        public override bool Equals(object? o)
         {
-            if (o != null && o.GetType().Equals(this.GetType()))
+            if (o != null && o.GetType().Equals(GetType()))
             {
                 DobbleGame dG = (DobbleGame)o;
-                return this.name.Equals(dG.getGameName()) || (this.playersGameControl.Equals(dG.playersGameControl) && (this.status == dG.status) && this.mode.Equals(dG.mode) && this.gameArea.Equals(dG.gameArea));
+                return name.Equals(dG.getGameName()) || playersGameControl.Equals(dG.playersGameControl) && status == dG.status && mode.Equals(dG.mode) && gameArea.Equals(dG.gameArea);
             }
             return false;
         }
@@ -553,20 +547,20 @@ namespace model
         * </p>
         * @return String en representacion del juego Dobble.
         */
-        public override String ToString()
+        public override string ToString()
         {
-            String gameName = "Nombre del juego: " + this.name;
-            String modeName = "\nModo de juego: " + getNameOfMode() + ", en su version: " + getVersionMode();
-            String st = "Estado del Juego: " + getStatus();
-            String cards = "Cartas en juego:\n" + cardsInPlayString();
-            String players = "Jugadores registrados:\n" + registeredPlayers();
-            String jump = "\n--------------\n";
-            String strFinal = gameName + modeName + jump + st + jump + cards + jump + players;
-            if (this.status == "Juego Terminado")
+            string gameName = "Nombre del juego: " + name;
+            string modeName = "\nModo de juego: " + getNameOfMode() + ", en su version: " + getVersionMode();
+            string st = "Estado del Juego: " + getStatus();
+            string cards = "Cartas en juego:\n" + cardsInPlayString();
+            string players = "Jugadores registrados:\n" + registeredPlayers();
+            string jump = "\n--------------\n";
+            string strFinal = gameName + modeName + jump + st + jump + cards + jump + players;
+            if (status == "Juego Terminado")
             {
-                String winners = "Ganadores:\n" + this.playersGameControl.getWinners();
-                String losers = "Perdedores:\n" + this.playersGameControl.getLosers();
-                String results = "Resultados Finales:\n" + winners + "\n" + losers;
+                string winners = "Ganadores:\n" + playersGameControl.getWinners();
+                string losers = "Perdedores:\n" + playersGameControl.getLosers();
+                string results = "Resultados Finales:\n" + winners + "\n" + losers;
                 strFinal += jump + results;
             }
             return strFinal;

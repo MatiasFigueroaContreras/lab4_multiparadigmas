@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
-    internal class StackPlayerVsCpuMode: Stack
+    internal class StackPlayerVsCpuMode : Stack
     {
         /**
         * <p> Otorga una lista con las opciones de juego segun el estado en el
@@ -15,25 +15,25 @@ namespace model
         * @param dGame juego Dobble, para obtener el estado de este.
         * @return lista con las opciones de juego.
         */
-        public override String[] playsOptions(DobbleGame dGame)
+        public override string[] playsOptions(DobbleGame dGame)
         {
-            String status = dGame.getStatus();
-            String[] str;
+            string status = dGame.getStatus();
+            string[] str;
 
             if (status.Equals("Esperando cartas en mesa"))
             {
-                str = new String[1];
+                str = new string[1];
                 str[0] = "Voltear Cartas";
             }
             else if (status.Equals("Cartas volteadas"))
             {
-                str = new String[2];
+                str = new string[2];
                 str[0] = "Elegir elemento en comun";
                 str[1] = "Pasar";
             }
             else
             {
-                str = new String[1];
+                str = new string[1];
                 str[0] = "Siguiente jugada";
             }
 
@@ -48,13 +48,13 @@ namespace model
         * @param option opcion para realizar la jugada.
         * @return estado luego de la jugada realizada.
         */
-        public override String? play(DobbleGame dGame, String option)
+        public override string play(DobbleGame dGame, string option)
         {
-            String status = dGame.getStatus();
+            string status = dGame.getStatus();
             if (dGame.numDobbleCards() < 2)
             {
                 dGame.finish();
-                return null;
+                throw new DobbleGameException(501, "Juego finalizado.");
             }
             if (status.Equals("Esperando cartas en mesa"))
             {
@@ -76,16 +76,16 @@ namespace model
             {
                 return "Esperando cartas en mesa";
             }
-            return null;
+            throw new DobbleGameException(600, "La opcion ingresada no es valida.");
         }
 
 
-        private String cpuPlay(DobbleGame dGame, String playerStatus)
+        private string cpuPlay(DobbleGame dGame, string playerStatus)
         {
             Random rand = new Random();
             int randNumber = (int)rand.NextInt64(1, dGame.numElements());
-            String element = dGame.nthElement(randNumber);
-            String cpuStatus = spotIt(element, dGame);
+            string element = dGame.nthElement(randNumber);
+            string cpuStatus = spotIt(element, dGame);
             if (cpuStatus.Equals("SpotIt"))
             {
                 dGame.addScorePlayer(dGame.numCardsInPlay(), "CPU");
@@ -108,23 +108,23 @@ namespace model
         *               para realizar la jugada.
         * @return estado luego de la jugada realizada.
         */
-        public override String? play(DobbleGame dGame, String option, String[] data)
+        public override string play(DobbleGame dGame, string option, string[] data)
         {
             if (dGame.getStatus().Equals("Cartas volteadas"))
             {
                 if (option.Equals("Elegir elemento en comun"))
                 {
-                    String element = data[0];
-                    String playerStatus = spotIt(element, dGame);
-                    String cpuStatus = cpuPlay(dGame, playerStatus);
+                    string element = data[0];
+                    string playerStatus = spotIt(element, dGame);
+                    string cpuStatus = cpuPlay(dGame, playerStatus);
                     dGame.setStatus(playerStatus);
-                    String status = dGame.whoseTurnIsIt() + ": " + playerStatus + ", CPU: " + cpuStatus;
+                    string status = dGame.whoseTurnIsIt() + ": " + playerStatus + ", CPU: " + cpuStatus;
                     pass(dGame);
                     dGame.nextTurn();
                     return status;
                 }
             }
-            return null;
+            throw new DobbleGameException(600, "La opcion ingresada no es valida.");
         }
 
         /**
@@ -133,7 +133,7 @@ namespace model
         * @param dGame juego Dobble para agregar a la CPU como jugador.
         * @return estado luego de iniciar el juego.
         */
-        public override String start(DobbleGame dG)
+        public override string start(DobbleGame dG)
         {
             dG.registerExtra("CPU");
             return "Esperando cartas en mesa";
@@ -148,7 +148,7 @@ namespace model
         * @return Element si es necesario que se ingrese este, o null si no se 
         *           necesita informacion extra.
         */
-        public override String? extraDataNeeded(String status, String option)
+        public override string? extraDataNeeded(string status, string option)
         {
             if (status.Equals("Cartas volteadas") && option.Equals("Elegir elemento en comun"))
             {
@@ -165,7 +165,7 @@ namespace model
         * </p>
         * @return Version del modo de juego "Player vs CPU".
         */
-        public override String getVersionModeName()
+        public override string getVersionModeName()
         {
             return "Player vs CPU";
         }
@@ -206,9 +206,9 @@ namespace model
         * @param object objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public override bool Equals(Object? o)
+        public override bool Equals(object? o)
         {
-            return (o != null && o.GetType().Equals(this.GetType()));
+            return o != null && o.GetType().Equals(GetType());
         }
     }
 }

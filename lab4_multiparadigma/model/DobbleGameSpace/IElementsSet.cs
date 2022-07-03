@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * 
@@ -40,7 +40,7 @@ namespace model
         * @param n indice (nth) a buscar en el conjunto.
         * @return el nth elemento representado en string.
         */
-        public String nthElementString(int n);
+        public string nthElementString(int n);
 
         /**
         * <p> Cuenta la cantidad de elementos en el conjunto.
@@ -62,7 +62,7 @@ namespace model
         * </p>
         * @param element elemento a agregar al conjunto.
         */
-        public void add(String element);
+        public void add(string element);
 
         /**
         * <p> Agrega x cantidad de elementos al conjunto
@@ -91,7 +91,7 @@ namespace model
         * </p>
         * @param element elemento a eliminar del conjunto, en su forma de String.
         */
-        public void remove(String element);
+        public void remove(string element);
 
         /**
         * <p> Elimina todos los elementos del conjunto.
@@ -116,7 +116,7 @@ namespace model
         * @return true si el conjunto contiene el elemento dado, false sino lo
         *           contiene.
         */
-        public bool contains(String element);
+        public bool contains(string element);
 
         /**
         * <p> Busca el indice del elemento entregado.
@@ -131,7 +131,7 @@ namespace model
         * </p>
         * @return String en representacion del conjunto de elementos.
         */
-        public String ToString();
+        public string ToString();
 
         /**
         * <p> Compara this con otro Objeto.
@@ -139,6 +139,6 @@ namespace model
         * @param obj objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public bool Equals(Object? obj);
+        public bool Equals(object? obj);
     }
 }

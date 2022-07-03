@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * Busca Representar un mazo de cartas Dobble con elementos que este contiene, y
      *  respetando las propiedades de este.
      * @author Matias Figueroa Contreras
      */
-    internal class Dobble: IDobble
+    internal class Dobble : IDobble
     {
         /**
         * El mazo de cartas como tal inicializando el mazo en uno vacio.
@@ -49,8 +49,8 @@ namespace model
             if (isPrime(n))
             {
                 int totalCards = totalCardsNumElements(numE);
-                this.elements = new ElementsSet();
-                this.elementsAppareances = new int[totalCards];
+                elements = new ElementsSet();
+                elementsAppareances = new int[totalCards];
                 initElementsAppearances();
                 this.numE = numE;
             }
@@ -64,7 +64,7 @@ namespace model
         * @param numE numero de elementos por carta.
         * @return el objeto Dobble creado.
         */
-        public Dobble(ElementsSet elements, int numE): this(numE)
+        public Dobble(ElementsSet elements, int numE) : this(numE)
         {
             this.elements = elements;
         }
@@ -79,7 +79,7 @@ namespace model
         * @param maxC maximo numero de cartas que tendra el mazo de cartas.
         * @return el objeto Dobble creado.
         */
-        public Dobble(ElementsSet elements, int numE, int maxC): this(numE)
+        public Dobble(ElementsSet elements, int numE, int maxC) : this(numE)
         {
             int totalCards = totalCardsNumElements(numE);
             if (elements.numElements() < totalCards)
@@ -100,7 +100,7 @@ namespace model
         * @param maxC maximo numero de cartas que tendra el mazo de cartas.
         * @return el objeto Dobble creado.
         */
-        public Dobble(List<String> elements, int numE, int maxC): this(numE)
+        public Dobble(List<string> elements, int numE, int maxC) : this(numE)
         {
             ElementsSet eS = new ElementsSet(elements);
             int totalCards = totalCardsNumElements(numE);
@@ -114,7 +114,7 @@ namespace model
 
         private bool isPrime(int n)
         {
-            if(n == 1)
+            if (n == 1)
             {
                 return true;
             }
@@ -123,9 +123,9 @@ namespace model
                 return false;
             }
 
-            for(int i = 2; i < n; i++)
+            for (int i = 2; i < n; i++)
             {
-                if(n % i == 0)
+                if (n % i == 0)
                 {
                     return false;
                 }
@@ -142,19 +142,19 @@ namespace model
         */
         public void initDobbleCards(int maxC)
         {
-            int totalCards = totalCardsNumElements(this.numE);
-            if (this.elements.numElements() >= totalCards)
+            int totalCards = totalCardsNumElements(numE);
+            if (elements.numElements() >= totalCards)
             {
-                int n = this.numE - 1;
+                int n = numE - 1;
                 if (maxC <= 0)
                 {
                     maxC = totalCardsNumElements(numE);
                 }
-                this.dobbleCS.clear();
+                dobbleCS.clear();
                 firstCardGeneration(n);
                 nCardsGeneration(n, maxC - 1);
                 n2CardsGeneration(n, maxC - n - 1);
-                this.dobbleCS.mix();
+                dobbleCS.mix();
             }
         }
 
@@ -168,10 +168,10 @@ namespace model
             Card card = new Card();
             for (int i = 1; i <= n + 1; i++)
             {
-                card.add(this.elements.nthElement(i));
-                this.elementsAppareances[i - 1]++;
+                card.add(elements.nthElement(i));
+                elementsAppareances[i - 1]++;
             }
-            this.dobbleCS.add(card);
+            dobbleCS.add(card);
         }
 
         /**
@@ -185,14 +185,14 @@ namespace model
             for (int i = 1; i <= n && maxC > 0; i++, maxC--)
             {
                 Card card = new Card();
-                card.add(this.elements.nthElement(1));
-                this.elementsAppareances[0]++;
+                card.add(elements.nthElement(1));
+                elementsAppareances[0]++;
                 for (int j = 1; j <= n; j++)
                 {
-                    card.add(this.elements.nthElement(n * i + (j + 1)));
-                    this.elementsAppareances[(n * i + (j + 1)) - 1]++;
+                    card.add(elements.nthElement(n * i + j + 1));
+                    elementsAppareances[n * i + j + 1 - 1]++;
                 }
-                this.dobbleCS.add(card);
+                dobbleCS.add(card);
             }
         }
 
@@ -209,14 +209,14 @@ namespace model
                 for (int j = 1; j <= n && maxC > 0; j++, maxC--)
                 {
                     Card card = new Card();
-                    card.add(this.elements.nthElement(i + 1));
-                    this.elementsAppareances[i]++;
+                    card.add(elements.nthElement(i + 1));
+                    elementsAppareances[i]++;
                     for (int k = 1; k <= n; k++)
                     {
-                        card.add(this.elements.nthElement(n + 2 + n * (k - 1) + (((i - 1) * (k - 1) + j - 1) % n)));
-                        this.elementsAppareances[(n + 2 + n * (k - 1) + (((i - 1) * (k - 1) + j - 1) % n)) - 1]++;
+                        card.add(elements.nthElement(n + 2 + n * (k - 1) + ((i - 1) * (k - 1) + j - 1) % n));
+                        elementsAppareances[n + 2 + n * (k - 1) + ((i - 1) * (k - 1) + j - 1) % n - 1]++;
                     }
-                    this.dobbleCS.add(card);
+                    dobbleCS.add(card);
                 }
             }
         }
@@ -238,9 +238,9 @@ namespace model
         */
         private void initElementsAppearances()
         {
-            for (int i = 0; i < this.elementsAppareances.Length; i++)
+            for (int i = 0; i < elementsAppareances.Length; i++)
             {
-                this.elementsAppareances[i] = 0;
+                elementsAppareances[i] = 0;
             }
         }
 
@@ -252,7 +252,7 @@ namespace model
         public ICardsSet getDobbleCards()
         {
             CardsSet dobbleCSCopy = new CardsSet();
-            dobbleCSCopy.setCards(this.dobbleCS.getCards());
+            dobbleCSCopy.setCards(dobbleCS.getCards());
             return dobbleCSCopy;
         }
 
@@ -267,13 +267,13 @@ namespace model
         {
             if (completeNumElements())
             {
-                int[] copyEA = (int[])this.elementsAppareances.Clone();
+                int[] copyEA = (int[])elementsAppareances.Clone();
                 initElementsAppearances();
                 if (isDobbleCards(newDobbleCards))
                 {
-                    this.dobbleCS.setCards(newDobbleCards.getCards());
+                    dobbleCS.setCards(newDobbleCards.getCards());
                 }
-                this.elementsAppareances = copyEA;
+                elementsAppareances = copyEA;
             }
         }
 
@@ -285,7 +285,7 @@ namespace model
         public ElementsSet getElements()
         {
             ElementsSet elementsCopy = new();
-            elementsCopy.setElements(this.elements.getElements());
+            elementsCopy.setElements(elements.getElements());
             return elementsCopy;
         }
 
@@ -299,11 +299,11 @@ namespace model
         */
         public void setElements(ElementsSet newElements)
         {
-            if (this.dobbleCS.numCards() == 0)
+            if (dobbleCS.numCards() == 0)
             {
                 if (newElements.numElements() <= totalCardsNumElements(numE))
                 {
-                    this.elements.setElements(newElements.getElements());
+                    elements.setElements(newElements.getElements());
                 }
             }
         }
@@ -315,7 +315,7 @@ namespace model
         */
         private bool completeNumElements()
         {
-            return this.elements.numElements() == totalCardsNumElements(numE);
+            return elements.numElements() == totalCardsNumElements(numE);
         }
 
         /**
@@ -330,7 +330,7 @@ namespace model
             for (int i = 1; i <= cards.numCards(); i++)
             {
                 Card nCard = cards.nthCard(i);
-                if (addElementsAppearences(nCard, this.elementsAppareances))
+                if (addElementsAppearences(nCard, elementsAppareances))
                 {
                     for (int j = i + 1; j <= cards.numCards(); j++)
                     {
@@ -363,8 +363,8 @@ namespace model
         {
             for (int i = 1; i <= card.numElements(); i++)
             {
-                int eIndex = this.elements.elementIndex(card.nthElement(i)) - 1;
-                if (eIndex <= -1 || (elementsA[eIndex] + 1) > this.numE)
+                int eIndex = elements.elementIndex(card.nthElement(i)) - 1;
+                if (eIndex <= -1 || elementsA[eIndex] + 1 > numE)
                 {
                     return false;
                 }
@@ -386,8 +386,8 @@ namespace model
         {
             for (int i = 1; i <= card.numElements(); i++)
             {
-                int eIndex = this.elements.elementIndex(card.nthElement(i)) - 1;
-                this.elementsAppareances[eIndex]--;
+                int eIndex = elements.elementIndex(card.nthElement(i)) - 1;
+                elementsAppareances[eIndex]--;
             }
         }
 
@@ -424,9 +424,9 @@ namespace model
         */
         public CardsSet missingCards()
         {
-            int numE = this.dobbleCS.nthCard(1).numElements();
-            Dobble fullDobble = new Dobble(this.elements, numE, 0);
-            fullDobble.dobbleCS.subtract(this.dobbleCS);
+            int numE = dobbleCS.nthCard(1).numElements();
+            Dobble fullDobble = new Dobble(elements, numE, 0);
+            fullDobble.dobbleCS.subtract(dobbleCS);
             return fullDobble.dobbleCS;
         }
 
@@ -438,9 +438,9 @@ namespace model
         */
         public bool isValidCard(Card card)
         {
-            for (int i = 1; i <= this.dobbleCS.numCards(); i++)
+            for (int i = 1; i <= dobbleCS.numCards(); i++)
             {
-                if (!this.dobbleCS.nthCard(i).oneCommonElement(card))
+                if (!dobbleCS.nthCard(i).oneCommonElement(card))
                 {
                     return false;
                 }
@@ -456,7 +456,7 @@ namespace model
         */
         public Card nthCard(int i)
         {
-            return this.dobbleCS.nthCard(i);
+            return dobbleCS.nthCard(i);
         }
 
         /**
@@ -466,7 +466,7 @@ namespace model
         */
         public int numCards()
         {
-            return this.dobbleCS.numCards();
+            return dobbleCS.numCards();
         }
 
         /**
@@ -479,13 +479,13 @@ namespace model
         {
             if (completeNumElements())
             {
-                int[] copyEA = (int[])this.elementsAppareances.Clone();
+                int[] copyEA = (int[])elementsAppareances.Clone();
                 if (addElementsAppearences(card, copyEA))
                 {
                     if (isValidCard(card))
                     {
-                        this.dobbleCS.add(card);
-                        this.elementsAppareances = copyEA;
+                        dobbleCS.add(card);
+                        elementsAppareances = copyEA;
                     }
                 }
             }
@@ -499,8 +499,8 @@ namespace model
         */
         public void removeCard(int n)
         {
-            resElementsAppearences(this.dobbleCS.nthCard(n));
-            this.dobbleCS.remove(n);
+            resElementsAppearences(dobbleCS.nthCard(n));
+            dobbleCS.remove(n);
         }
 
         /**
@@ -511,7 +511,7 @@ namespace model
         */
         public void removeCard(Card card)
         {
-            this.dobbleCS.remove(card);
+            dobbleCS.remove(card);
             resElementsAppearences(card);
         }
 
@@ -521,11 +521,11 @@ namespace model
         * </p>
         * @param element elemento representado en String a agregar al conjunto.
         */
-        public void addElement(String element)
+        public void addElement(string element)
         {
             if (!completeNumElements())
             {
-                this.elements.add(element);
+                elements.add(element);
             }
         }
 
@@ -536,7 +536,7 @@ namespace model
         */
         public int numElements()
         {
-            return this.elements.numElements();
+            return elements.numElements();
         }
 
         /**
@@ -546,9 +546,9 @@ namespace model
         * @param n indice (nth) a buscar en el conjunto.
         * @return el nth elemento buscado en su representacion de String.
         */
-        public String nthElement(int i)
+        public string nthElement(int i)
         {
-            return this.elements.nthElementString(i);
+            return elements.nthElementString(i);
         }
 
         /**
@@ -558,9 +558,9 @@ namespace model
         */
         public void removeElement(int n)
         {
-            if (this.dobbleCS.numCards() == 0)
+            if (dobbleCS.numCards() == 0)
             {
-                this.elements.remove(n);
+                elements.remove(n);
             }
         }
 
@@ -571,11 +571,11 @@ namespace model
         * @param element elemento a eliminar del conjunto (this.elements), 
         *           en su forma de String.
         */
-        public void removeElement(String e)
+        public void removeElement(string e)
         {
-            if (this.dobbleCS.numCards() == 0)
+            if (dobbleCS.numCards() == 0)
             {
-                this.elements.remove(e);
+                elements.remove(e);
             }
         }
 
@@ -585,9 +585,9 @@ namespace model
         * @return String en representacion del mazo Dobble, con los elementos que
         *           contiene, y cartas del mazo.
         */
-        public override String ToString()
+        public override string ToString()
         {
-            return "Elements:\n" + this.elements.ToString() + "\nCards:\n" + this.dobbleCS.ToString();
+            return "Elements:\n" + elements.ToString() + "\nCards:\n" + dobbleCS.ToString();
         }
 
         /**
@@ -598,12 +598,12 @@ namespace model
         * @param object objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public override bool Equals(Object? o)
+        public override bool Equals(object? o)
         {
-            if (o != null && o.GetType().Equals(this.GetType()))
+            if (o != null && o.GetType().Equals(GetType()))
             {
                 Dobble d = (Dobble)o;
-                return d.dobbleCS.Equals(this.dobbleCS) && d.elements.Equals(this.elements);
+                return d.dobbleCS.Equals(dobbleCS) && d.elements.Equals(elements);
             }
             return false;
         }

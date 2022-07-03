@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * Busca representar un conjunto de elementos (IElement), respetando como 
      *  funcionan los conjuntos.
      * @author Matias Figueroa Contreras
      */
-    internal class ElementsSet: IElementsSet
+    internal class ElementsSet : IElementsSet
     {
         /**
 * El conjunto de elementos implementado como un ArrayList.
@@ -25,7 +25,7 @@ namespace model
         */
         public ElementsSet()
         {
-            this.elementsSet = new();
+            elementsSet = new();
         }
 
         /**
@@ -35,9 +35,9 @@ namespace model
         * @param elements Arreglo de strings con los elementos a agregar.
         * @return el objeto ElementSet creado.
         */
-        public ElementsSet(List<String> elements)
+        public ElementsSet(List<string> elements)
         {
-            this.elementsSet = new();
+            elementsSet = new();
             for (int i = 0; i < elements.Count; i++)
             {
                 Element e = new Element(elements[i]);
@@ -52,7 +52,7 @@ namespace model
         */
         public List<Element> getElements()
         {
-            List<Element> eSCopy = new(this.elementsSet);
+            List<Element> eSCopy = new(elementsSet);
             return eSCopy;
         }
 
@@ -67,7 +67,7 @@ namespace model
         {
             if (isElementsSet(newElements))
             {
-                this.elementsSet = new(newElements);
+                elementsSet = new(newElements);
             }
         }
 
@@ -96,7 +96,7 @@ namespace model
         */
         public Element nthElement(int n)
         {
-            return this.elementsSet[n - 1];
+            return elementsSet[n - 1];
         }
 
 
@@ -106,7 +106,7 @@ namespace model
         * @param n indice (nth) a buscar en el conjunto.
         * @return el nth elemento representado en string.
         */
-        public String nthElementString(int n)
+        public string nthElementString(int n)
         {
             return nthElement(n).ToString();
         }
@@ -119,7 +119,7 @@ namespace model
         */
         public int numElements()
         {
-            return this.elementsSet.Count;
+            return elementsSet.Count;
         }
 
 
@@ -133,7 +133,7 @@ namespace model
         {
             if (!contains(element))
             {
-                this.elementsSet.Add(element);
+                elementsSet.Add(element);
             }
         }
 
@@ -143,7 +143,7 @@ namespace model
         * </p>
         * @param element elemento a agregar al conjunto.
         */
-        public void add(String element)
+        public void add(string element)
         {
             Element el = new(element);
             add(el);
@@ -177,7 +177,7 @@ namespace model
         */
         public void remove(int n)
         {
-            this.elementsSet.RemoveAt(n - 1);
+            elementsSet.RemoveAt(n - 1);
         }
 
         /**
@@ -187,7 +187,7 @@ namespace model
         */
         public void remove(Element element)
         {
-            this.elementsSet.Remove(element);
+            elementsSet.Remove(element);
         }
 
         /**
@@ -196,7 +196,7 @@ namespace model
         * </p>
         * @param element elemento a eliminar del conjunto, en su forma de String.
         */
-        public void remove(String element)
+        public void remove(string element)
         {
             Element el = new(element);
             remove(el);
@@ -208,7 +208,7 @@ namespace model
         */
         public void clear()
         {
-            this.elementsSet.Clear();
+            elementsSet.Clear();
         }
 
         /**
@@ -238,7 +238,7 @@ namespace model
         * @return true si el conjunto contiene el elemento dado, false sino lo
         *           contiene.
         */
-        public bool contains(String element)
+        public bool contains(string element)
         {
             Element e = new(element);
             for (int i = 1; i <= numElements(); i++)
@@ -274,9 +274,9 @@ namespace model
         * </p>
         * @return String en representacion del conjunto de elementos.
         */
-        public override String ToString()
+        public override string ToString()
         {
-            String str = "";
+            string str = "";
             int i;
             for (i = 1; i < numElements(); i++)
             {
@@ -301,9 +301,9 @@ namespace model
         * @param object objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public override bool Equals(Object? o)
+        public override bool Equals(object? o)
         {
-            if (o != null && o.GetType().Equals(this.GetType()))
+            if (o != null && o.GetType().Equals(GetType()))
             {
                 ElementsSet eS = (ElementsSet)o;
                 if (numElements() == eS.numElements())

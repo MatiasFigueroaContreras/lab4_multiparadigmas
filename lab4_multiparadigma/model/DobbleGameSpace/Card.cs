@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * Representa una carta para el juego Dobble, la cual hereda los atributos
      *  y metodos de la clase ElementsSet.
      * @author Matias Figueroa Contreras
      */
-    internal class Card: ElementsSet
+    internal class Card : ElementsSet
     {
         /**
         * <p> Constructor, con un conjunto de elementos vacio.
@@ -20,7 +20,7 @@ namespace model
         */
         public Card()
         {
-            this.elementsSet = new();
+            elementsSet = new();
         }
 
         /**
@@ -30,9 +30,9 @@ namespace model
         * @param elements Arreglo de strings con los elementos a agregar.
         * @return el objeto Card creado.
         */
-        public Card(List<String> elements)
+        public Card(List<string> elements)
         {
-            this.elementsSet = new();
+            elementsSet = new();
             for (int i = 0; i < elements.Count; i++)
             {
                 Element e = new Element(elements[i]);

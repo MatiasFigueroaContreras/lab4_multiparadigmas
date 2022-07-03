@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
-    internal abstract class Stack: Mode
+    internal abstract class Stack : Mode
     {
 
         /**
@@ -14,7 +14,7 @@ namespace model
         * </p>
         * @return nombre del modo de juego "Stack".
         */
-        public String getModeName()
+        public string getModeName()
         {
             return "Stack";
         }
@@ -41,7 +41,7 @@ namespace model
         * @return estado de la accion "SpotIt", si se cumple que el elemento se repite
         *           en almenos dos cartas, "NotSpotIt" si no se cumple.
         */
-        protected String spotIt(String element, DobbleGame dG)
+        protected string spotIt(string element, DobbleGame dG)
         {
             if (dG.elementOccurrencesCardsInPlay(element) >= 2)
             {
@@ -76,12 +76,12 @@ namespace model
             dG.nextTurn();
         }
 
-        public abstract String[] playsOptions(DobbleGame dGame);
-        public abstract String? play(DobbleGame dGame, string option);
-        public abstract String? play(DobbleGame dGame, string option, string[] data);
-        public abstract String start(DobbleGame dG);
-        public abstract String getVersionModeName();
-        public abstract String? extraDataNeeded(string status, string option);
+        public abstract string[] playsOptions(DobbleGame dGame);
+        public abstract string play(DobbleGame dGame, string option);
+        public abstract string play(DobbleGame dGame, string option, string[] data);
+        public abstract string start(DobbleGame dG);
+        public abstract string getVersionModeName();
+        public abstract string? extraDataNeeded(string status, string option);
         public abstract int getMaxPlayers();
         public abstract int getMinPlayers();
         public abstract int getExtraPlayers();

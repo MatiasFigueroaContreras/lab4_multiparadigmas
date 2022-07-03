@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     internal interface IDobble
     {
@@ -87,7 +87,7 @@ namespace model
         * </p>
         * @param element elemento representado en String a agregar al conjunto.
         */
-        public void addElement(String element);
+        public void addElement(string element);
 
         /**
         * <p> Cuenta la cantidad de elementos del conjunto de estos.
@@ -103,7 +103,7 @@ namespace model
         * @param n indice (nth) a buscar en el conjunto.
         * @return el nth elemento buscado en su representacion de String.
         */
-        public String nthElement(int i);
+        public string nthElement(int i);
 
         /**
         * <p> Elimina el nth Elemento del conjunto (this.elements) (partiendo de 1).
@@ -119,7 +119,7 @@ namespace model
         * @param element elemento a eliminar del conjunto (this.elements), 
         *           en su forma de String.
         */
-        public void removeElement(String element);
+        public void removeElement(string element);
 
         /**
         * <p> Getter.
@@ -155,7 +155,7 @@ namespace model
         * @return String en representacion del mazo Dobble, con los elementos que
         *           contiene, y cartas del mazo.
         */
-        public String ToString();
+        public string ToString();
 
         /**
         * <p> Compara this con otro Objeto.
@@ -163,6 +163,6 @@ namespace model
         * @param object objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public bool Equals(Object? o);
+        public bool Equals(object? o);
     }
 }

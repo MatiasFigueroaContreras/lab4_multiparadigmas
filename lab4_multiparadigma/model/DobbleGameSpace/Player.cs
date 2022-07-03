@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * Representa a un jugador con su nombre, puntaje y cartas asociadas.
@@ -15,7 +15,7 @@ namespace model
         /**
         * Nombre del jugador.
         */
-        private String name;
+        private string name;
 
         /**
         * Puntaje del jugador.
@@ -33,14 +33,17 @@ namespace model
         * @param name nombre del jugador a crear.
         * @return el objeto Player creado.
         */
-        public Player(String name)
+        public Player(string name)
         {
             if (name.Replace(" ", "").Length > 0)
             {
                 this.name = name;
-                this.score = 0;
+                score = 0;
             }
-
+            else
+            {
+                throw new DobbleGameException(701, "Nombre de jugador no valido");
+            }
         }
 
         /**
@@ -68,7 +71,7 @@ namespace model
         * </p>
         * @param name nombre a cambiar del jugador.
         */
-        public void setName(String name)
+        public void setName(string name)
         {
             if (name.Replace(" ", "").Length > 0)
             {
@@ -101,9 +104,9 @@ namespace model
         * </p>
         * @return nombre del jugador.
         */
-        public String getName()
+        public string getName()
         {
-            return this.name;
+            return name;
         }
 
         /**
@@ -113,7 +116,7 @@ namespace model
         */
         public int getScore()
         {
-            return this.score;
+            return score;
         }
 
         /**
@@ -123,7 +126,7 @@ namespace model
         */
         public CardsSet getCards()
         {
-            return this.cards;
+            return cards;
         }
 
         /**
@@ -132,9 +135,9 @@ namespace model
         * </p>
         * @return String en representacion del jugador.
         */
-        public override String ToString()
+        public override string ToString()
         {
-            return "Nombre: " + this.name + ", Puntaje: " + this.score;
+            return "Nombre: " + name + ", Puntaje: " + score;
         }
 
         /**
@@ -144,9 +147,9 @@ namespace model
         * @param object objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public override bool Equals(Object? o)
+        public override bool Equals(object? o)
         {
-            if (o != null && o.GetType().Equals(this.GetType()))
+            if (o != null && o.GetType().Equals(GetType()))
             {
                 Player p = (Player)o;
                 return getName().Equals(p.name);

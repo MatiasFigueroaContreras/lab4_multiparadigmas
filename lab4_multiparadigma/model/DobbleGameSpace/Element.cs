@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * La clase Element, busca representar los elementos que estara presente en las
      *  cartas, de una manera mas estandarizada.
      * @author Matias Figueroa Contreras
      */
-    internal class Element: IElement
+    internal class Element : IElement
     {
         /**
         * El Elemento que sera representado como una String.
         */
-        public String element;
+        public string element;
 
         /**
         * <p> Crea el objeto Element.
@@ -24,7 +24,7 @@ namespace model
         * @param element El elemento representado en String
         * @return el objeto Element creado
         */
-        public Element(String element)
+        public Element(string element)
         {
             this.element = element;
         }
@@ -47,12 +47,12 @@ namespace model
         * @param object objeto a comparar con this
         * @return true si son iguales, false si no son iguales.
         */
-        public override bool Equals(Object? o)
+        public override bool Equals(object? o)
         {
-            if (o != null && o.GetType().Equals(this.GetType()))
+            if (o != null && o.GetType().Equals(GetType()))
             {
                 Element e = (Element)o;
-                return this.element.Equals(e.element);
+                return element.Equals(e.element);
             }
             return false;
         }
@@ -62,9 +62,9 @@ namespace model
         * </p>
         * @return String en representacion del elemento (this.element).
         */
-        public override String ToString()
+        public override string ToString()
         {
-            return this.element;
+            return element;
         }
     }
 }

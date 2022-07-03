@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model
+namespace model.DobbleGameSpace
 {
     /**
      * Representa lo referente al control de jugadores de un juego.
@@ -39,7 +39,7 @@ namespace model
             if (maxPlayers >= 1)
             {
                 this.maxPlayers = maxPlayers;
-                this.playerTurn = 1;
+                playerTurn = 1;
             }
         }
 
@@ -50,7 +50,7 @@ namespace model
         */
         public int getTotalPlayers()
         {
-            return this.players.Count;
+            return players.Count;
         }
 
         /**
@@ -58,9 +58,9 @@ namespace model
         * </p>
         * @return nombre del jugador que tiene el turno actual.
         */
-        public String getPlayerTurn()
+        public string getPlayerTurn()
         {
-            return nthPlayer(this.playerTurn).getName();
+            return nthPlayer(playerTurn).getName();
         }
 
         /**
@@ -69,14 +69,15 @@ namespace model
         * @param name nombre del jugador que se desea saber el puntaje.
         * @return puntaje del jugador dado.
         */
-        public int getPlayerScore(String name)
+        public int getPlayerScore(string name)
         {
             Player p = getPlayer(name);
-            if (p != null)
+            if (p == null)
             {
-                return p.getScore();
+                throw new DobbleGameException(700, "El jugador no se encuentra registrado");
             }
-            return 0;
+
+            return p.getScore();
         }
 
         /**
@@ -86,7 +87,7 @@ namespace model
         */
         public void addScoreCurrentPlayerTurn(int score)
         {
-            nthPlayer(this.playerTurn).addScore(score);
+            nthPlayer(playerTurn).addScore(score);
         }
 
         /**
@@ -95,7 +96,7 @@ namespace model
         * @param score puntaje a sumar.
         * @param name nombre del jugador a sumar el puntaje.
         */
-        public void addScorePlayer(int score, String name)
+        public void addScorePlayer(int score, string name)
         {
             getPlayer(name).addScore(score);
         }
@@ -107,7 +108,7 @@ namespace model
         */
         public void addCardsCurrentPlayerTurn(CardsSet cards)
         {
-            nthPlayer(this.playerTurn).addCards(cards);
+            nthPlayer(playerTurn).addCards(cards);
         }
 
         /**
@@ -116,7 +117,7 @@ namespace model
         * @param cards cartas a agregar.
         * @param name nombre del jugador a agregar las cartas.
         */
-        public void addCardsPlayer(CardsSet cards, String name)
+        public void addCardsPlayer(CardsSet cards, string name)
         {
             getPlayer(name).addCards(cards);
         }
@@ -130,12 +131,25 @@ namespace model
         * @param name nombre del jugador a registrar/ agregar a la lista de jugadores.
         * @param reservedSlots cantidad de espacios reservados para registrar jugadores.
         */
-        public void addPlayer(String name, int reservedSlots)
+        public void addPlayer(string name, int reservedSlots)
         {
             Player p = new Player(name);
-            if ((reservedSlots >= 0) && (getTotalPlayers() < (this.maxPlayers - reservedSlots)) && !contains(p) && (p.getName() != null) && (!name.Contains("CPU")))
+            if (name.Contains("CPU"))
             {
-                this.players.Add(p);
+                throw new DobbleGameException(701, "Nombre de jugador reservado.");
+            }
+            if (contains(p))
+            {
+                throw new DobbleGameException(702, "Jugador ya registrado.");
+            }
+
+            if (reservedSlots >= 0 && getTotalPlayers() < maxPlayers - reservedSlots)
+            {
+                players.Add(p);
+            }
+            else
+            {
+                throw new DobbleGameException(703, "No se pueden registrar más jugadores.");
             }
         }
 
@@ -146,12 +160,12 @@ namespace model
         * </p>
         * @param name nombre del jugador a registrar/ agregar a la lista de jugadores.
         */
-        public void addPlayer(String name)
+        public void addPlayer(string name)
         {
             Player p = new Player(name);
-            if ((getTotalPlayers() < this.maxPlayers) && !contains(p) && (p.getName() != null))
+            if (getTotalPlayers() < maxPlayers && !contains(p) && p.getName() != null)
             {
-                this.players.Add(p);
+                players.Add(p);
             }
         }
 
@@ -164,7 +178,7 @@ namespace model
         */
         public Player nthPlayer(int n)
         {
-            return this.players[n - 1];
+            return players[n - 1];
         }
 
         /**
@@ -191,7 +205,7 @@ namespace model
         * @param name nombre del jugador a buscar.
         * @return el jugador que tenga el nombre dado.
         */
-        public Player? getPlayer(String name)
+        public Player getPlayer(string name)
         {
             Player p = new Player(name);
             Player pi;
@@ -203,7 +217,7 @@ namespace model
                     return pi;
                 }
             }
-            return null;
+            throw new DobbleGameException(700, "El jugador no se encuentra registrado.");
         }
 
         /**
@@ -212,7 +226,7 @@ namespace model
         */
         public void nextTurn()
         {
-            if (this.playerTurn >= players.Count)
+            if (this.playerTurn >= this.players.Count)
             {
                 this.playerTurn = 1;
             }
@@ -247,10 +261,10 @@ namespace model
         * </p>
         * @return arreglo con los jugadores que ganaron/ estan ganando.
         */
-        public List<String> getWinners()
+        public List<string> getWinners()
         {
             int h = highestScore();
-            List<String> winners = new();
+            List<string> winners = new();
             for (int i = 1; i <= getTotalPlayers(); i++)
             {
                 Player nPlayer = nthPlayer(i);
@@ -268,10 +282,10 @@ namespace model
         * </p>
         * @return arreglo con los jugadores que perdieron/ estan perdiendo.
         */
-        public List<String> getLosers()
+        public List<string> getLosers()
         {
             int h = highestScore();
-            List<String> losers = new();
+            List<string> losers = new();
             for (int i = 1; i <= getTotalPlayers(); i++)
             {
                 Player nPlayer = nthPlayer(i);
@@ -291,12 +305,12 @@ namespace model
         * @param object objeto a comparar con this.
         * @return true si son iguales, false si no son iguales.
         */
-        public override bool Equals(Object? o)
+        public override bool Equals(object? o)
         {
-            if (o != null && o.GetType().Equals(this.GetType()))
+            if (o != null && o.GetType().Equals(GetType()))
             {
                 PlayersGameControl pGC = (PlayersGameControl)o;
-                return (this.maxPlayers == pGC.maxPlayers) && (this.playerTurn == pGC.playerTurn) && this.players.Equals(pGC);
+                return maxPlayers == pGC.maxPlayers && playerTurn == pGC.playerTurn && players.Equals(pGC);
             }
             return false;
         }
@@ -306,12 +320,12 @@ namespace model
         * </p>
         * @return String en representacion de los jugadores registrados.
         */
-        public override String ToString()
+        public override string ToString()
         {
-            String str = "";
+            string str = "";
             for (int i = 1; i <= getTotalPlayers(); i++)
             {
-                String n = i + ": ";
+                string n = i + ": ";
                 str += "Player n" + n + nthPlayer(i).ToString() + "\n";
             }
             return str;
