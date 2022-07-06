@@ -12,21 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace lab4_multiparadigma
+namespace lab4_multiparadigma.Views
 {
     /// <summary>
     /// Lógica de interacción para CreateGameView.xaml
     /// </summary>
-    public partial class CreateGameView : Window
+    public partial class CreateGameView : UserControl
     {
         public CreateGameView()
         {
             InitializeComponent();
-        }
-
-        private void GameModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

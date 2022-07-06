@@ -4,74 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab4_multiparadigma"
+        xmlns:viewmodels="clr-namespace:lab4_multiparadigma.ViewModels"
+        xmlns:views="clr-namespace:lab4_multiparadigma.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="1440"
         WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <Style x:Key="FocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <SolidColorBrush x:Key="Button.Static.Background"/>
-        <SolidColorBrush x:Key="Button.Static.Foreground" Color="White"/>
-        <SolidColorBrush x:Key="Button.Static.Border" />
-        <SolidColorBrush x:Key="Button.MouseOver.Background"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource Button.Static.Foreground}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="Baskerville Old Face"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    <Grid Background="#FF050505">
-        <Button x:Name="prueba" Content="Button" HorizontalAlignment="Left" Margin="1138,849,0,0" VerticalAlignment="Top" Click="prueba_Click" Height="106" Width="236"/>
-        <Label x:Name="Tittle" Content="DobbleGame" HorizontalAlignment="Center" Margin="0,179,0,0" VerticalAlignment="Top" Height="146" Width="594" Foreground="#FFECC601" FontSize="100"/>
-        <Button Style="{DynamicResource ButtonStyle}" x:Name="NewGame" Content="Juego Nuevo" HorizontalAlignment="Center" Margin="0,470,0,0" VerticalAlignment="Top" Height="110" Width="376" FontSize="60"/>
-        <Button Style="{DynamicResource ButtonStyle}" x:Name="ContinueGame" Content="Continuar Juego" HorizontalAlignment="Center" Margin="0,585,0,0" VerticalAlignment="Top" Height="110" Width="450" FontSize="60"/>
-        <Button Style="{DynamicResource ButtonStyle}" x:Name="Exit" Content="Salir" HorizontalAlignment="Center" Margin="0,700,0,0" VerticalAlignment="Top" Height="110" Width="186" FontSize="55"/>
-    </Grid>
+    <ContentControl Content ="{Binding CurrentViewModel}">
+        <ContentControl.Resources>
+            <DataTemplate DataType="{x:Type viewmodels:InitialViewModel}">
+                <views:InitialView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CreateGameViewModel}">
+                <views:CreateGameView />
+            </DataTemplate>
+        </ContentControl.Resources>
+    </ContentControl>
 </Window>

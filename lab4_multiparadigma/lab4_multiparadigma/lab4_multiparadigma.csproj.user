@@ -7,15 +7,21 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="CreateGameView.xaml.cs">
+    <Compile Update="Views\CreateGameView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\InitialView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="CreateGameView.xaml">
+    <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Views\CreateGameView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\InitialView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

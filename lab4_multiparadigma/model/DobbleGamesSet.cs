@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using model.DobbleGameSpace;
 
 namespace model
@@ -12,8 +9,9 @@ namespace model
         private List<DobbleGame> games = new();
         private List<int> gamesSeconds = new();
 
-        public void add(DobbleGame game, int seconds)
+        public void add(string gameName, int maxP, string mode, List<string> elements, int numE, int maxC, int seconds)
         {
+            DobbleGame game = new(gameName, maxP, mode, elements, numE, maxC);
             if (contains(game))
             {
                 throw (new DobbleGamesSetException(400, "El juego ya existe."));
