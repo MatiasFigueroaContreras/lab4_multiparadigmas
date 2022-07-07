@@ -17,6 +17,12 @@
             <DataTemplate DataType="{x:Type viewmodels:CreateGameViewModel}">
                 <views:CreateGameView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CreatedGamesViewModel}">
+                <views:CreatedGamesView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:DobbleGameViewModel}">
+                <views:DobbleGameView />
+            </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>
 </Window>

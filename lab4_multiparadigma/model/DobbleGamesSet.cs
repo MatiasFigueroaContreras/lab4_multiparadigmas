@@ -6,13 +6,12 @@ namespace model
 {
     public class DobbleGamesSet
     {
-        private List<DobbleGame> games = new();
+        public List<DobbleGame> games = new();
         private List<int> gamesSeconds = new();
 
         public void add(string gameName, int maxP, string mode, List<string> elements, int numE, int maxC, int seconds)
         {
-            DobbleGame game = new(gameName, maxP, mode, elements, numE, maxC);
-            if (contains(game))
+            if (contains(gameName))
             {
                 throw (new DobbleGamesSetException(400, "El juego ya existe."));
             }
@@ -20,6 +19,8 @@ namespace model
             {
                 throw (new DobbleGamesSetException(500, "Cantidad de segundos no valida."));
             }
+
+            DobbleGame game = new(gameName, maxP, mode, elements, numE, maxC);
 
             games.Add(game);
             gamesSeconds.Add(seconds);
@@ -29,6 +30,18 @@ namespace model
         public bool contains(DobbleGame game)
         {
             return this.games.Contains(game);
+        }
+
+        public bool contains(String name)
+        {
+            foreach(DobbleGame dG in this.games)
+            {
+                if (dG.getGameName().Equals(name))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public int getGameIndex(DobbleGame game)
@@ -44,6 +57,11 @@ namespace model
         public int getGameSeconds(DobbleGame game)
         {
             return this.gamesSeconds[getGameIndex(game)];
+        }
+
+        public int getSeconds(int i)
+        {
+            return gamesSeconds[i];
         }
 
         public void setGameSeconds(DobbleGame game, int seconds)

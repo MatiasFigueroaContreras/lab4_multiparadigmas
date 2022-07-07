@@ -7,7 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\CreatedGamesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreateGameView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DobbleGameView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\InitialView.xaml.cs">
@@ -18,7 +24,13 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\CreatedGamesView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\CreateGameView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DobbleGameView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\InitialView.xaml">

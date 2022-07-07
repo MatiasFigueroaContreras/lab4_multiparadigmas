@@ -19,9 +19,10 @@ namespace lab4_multiparadigma
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            DobbleGamesSet dobbleGameSet = new();
             NavigationStore navigationStore = new();
-            navigationStore.CurrentViewModel = new InitialViewModel(navigationStore);
+            DobbleGamesSet dobbleGameSet = new();
+
+            navigationStore.CurrentViewModel = new InitialViewModel(navigationStore, dobbleGameSet);
             MainWindow MainWindow = new();
             MainWindowViewModel DataContext = new(navigationStore);
             MainWindow.DataContext = DataContext;

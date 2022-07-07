@@ -16,7 +16,6 @@ namespace model.DobbleGameSpace
         * Nombre que se le dara al juego.
         */
         private string name;
-
         /**
         * Area de juego que contendra el mazo Dobble y las cartas en juego.
         */
@@ -75,6 +74,33 @@ namespace model.DobbleGameSpace
             this.mode = m;
         }
 
+        public string Name { get { return name; } }
+        public string Status { get { return status; } }
+        public string BasicStatus
+        {
+            get
+            {
+                if(Status.Equals("Esperando inicio del juego"))
+                {
+                    return "No Iniciado";
+                }
+                else if(Status.Equals("Juego Terminado"))
+                {
+                    return "Terminado";
+                }
+                else
+                {
+                    return "Iniciado";
+                }
+            }
+        }
+        
+        public string GameMode
+        {
+            get { return getNameOfMode() + getVersionMode(); }
+        }
+
+
         /**
         * <p> dado un String se�alando el modo, se crea este objeto Mode, si es que
         *       esta disponible para se inicializado.
@@ -87,7 +113,7 @@ namespace model.DobbleGameSpace
         {
             switch (mode)
             {
-                case "Stack Player vs CPU":
+                case "Stack Player VS CPU":
                     {
                         return new StackPlayerVsCpuMode();
                     }
@@ -534,7 +560,7 @@ namespace model.DobbleGameSpace
             if (o != null && o.GetType().Equals(GetType()))
             {
                 DobbleGame dG = (DobbleGame)o;
-                return name.Equals(dG.getGameName()) || playersGameControl.Equals(dG.playersGameControl) && status == dG.status && mode.Equals(dG.mode) && gameArea.Equals(dG.gameArea);
+                return (name.Equals(dG.getGameName())) || (playersGameControl.Equals(dG.playersGameControl) && status == dG.status && mode.Equals(dG.mode) && gameArea.Equals(dG.gameArea));
             }
             return false;
         }

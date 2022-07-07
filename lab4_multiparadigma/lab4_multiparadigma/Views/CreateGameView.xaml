@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:lab4_multiparadigma.Views"
+        xmlns:local="clr-namespace:lab4_multiparadigma.Views" 
+        xmlns:viewmodels="clr-namespace:lab4_multiparadigma.ViewModels"
         mc:Ignorable="d"
         d:Height="1024" d:Width="1440">
 
@@ -71,9 +72,9 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" x:Name="Tittle" Content="Crear Juego" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Height="146" Width="535" Foreground="#FFECC601" FontSize="100" FontFamily="Segoe UI"/>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -83,27 +84,26 @@
             </Grid.RowDefinitions>
             <!--GameName; Row: 0, Column: 0-->
             <Label Grid.Row="0" Grid.Column="0" x:Name="GameNameLabel" Content="Nombre del juego" Style="{DynamicResource LabelStyle}"/>
-            <TextBox Grid.Row="0" Grid.Column="0" x:Name="GameNameTextBox" Style="{DynamicResource TextBoxStyle}"/>
+            <TextBox Text="{Binding GameName}" Grid.Row="0" Grid.Column="0" x:Name="GameNameTextBox" Style="{DynamicResource TextBoxStyle}"/>
             <!--NumberCards; Row: 0, Column: 1-->
             <Label Grid.Row="0" Grid.Column="1" x:Name="NumberCardsLabel" Content="Numero de cartas" Style="{DynamicResource LabelStyle}"/>
-            <TextBox Grid.Row="0" Grid.Column="1" x:Name="NumberCardsTextBox" Style="{DynamicResource TextBoxStyle}"/>
+            <TextBox Text="{Binding NumberCards}" Grid.Row="0" Grid.Column="1" x:Name="NumberCardsTextBox" Style="{DynamicResource TextBoxStyle}"/>
             <!--GameMode; Row: 1, Column: 0-->
             <Label Grid.Row="1" Grid.Column="0" x:Name="GameModeLabel" Content="Modo de juego" Style="{DynamicResource LabelStyle}"/>
-            <ComboBox Grid.Row="1" Grid.Column="0" x:Name="GameModeComboBox" HorizontalAlignment="Left" Margin="64,0,0,0" VerticalAlignment="Center" Width="550" Height="64" Background="#FF4B4B4B" BorderBrush="{x:Null}" Foreground="White" FontSize="30" FontFamily="Baskerville Old Face">
+            <ComboBox SelectedValuePath="Content" SelectedValue="{Binding GameMode}" Grid.Row="1" Grid.Column="0" x:Name="GameModeComboBox" HorizontalAlignment="Left" Margin="64,0,0,0" VerticalAlignment="Center" Width="550" Height="64" Background="#FF4B4B4B" BorderBrush="{x:Null}" Foreground="Black" FontSize="30" FontFamily="Baskerville Old Face">
                 <ComboBoxItem>Stack Player VS CPU</ComboBoxItem>
                 <ComboBoxItem>Stack Player VS Player</ComboBoxItem>
             </ComboBox>
             <!--NumberElements; Row: 1, Column: 1-->
             <Label Grid.Row="1" Grid.Column="1" x:Name="NumberElementsLabel" Content="Numero de elementos por carta" Style="{DynamicResource LabelStyle}"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="NumberElementsTextBox" Style="{DynamicResource TextBoxStyle}"/>
+            <TextBox Text="{Binding NumberElements}" Grid.Row="1" Grid.Column="1" x:Name="NumberElementsTextBox" Style="{DynamicResource TextBoxStyle}"/>
             <!--Time; Row: 2, Column: 0-->
-            <Label Grid.Row="2" Grid.Column="0" x:Name="TimeLabel" Content="Tiempo" Style="{DynamicResource LabelStyle}"/>
-            <TextBox Grid.Row="2" Grid.Column="0" x:Name="TimeTextBox" Style="{DynamicResource TextBoxStyle}"/>
+            <Label Grid.Row="2" Grid.Column="0" x:Name="TimeLabel" Content="Tiempo en segundos" Style="{DynamicResource LabelStyle}"/>
+            <TextBox Text="{Binding GameTime}" Grid.Row="2" Grid.Column="0" x:Name="TimeTextBox" Style="{DynamicResource TextBoxStyle}"/>
             <!--MaxPlayers; Row: 2, Column: 1-->
             <Label Grid.Row="2" Grid.Column="1" x:Name="MaxPlayersLabel" Content="Maximos jugadores a registrar" Style="{DynamicResource LabelStyle}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" x:Name="MaxPlayersTextBox" Style="{DynamicResource TextBoxStyle}"/>
+            <TextBox Text="{Binding MaxPlayers}" Grid.Row="2" Grid.Column="1" x:Name="MaxPlayersTextBox" Style="{DynamicResource TextBoxStyle}"/>
         </Grid>
-        <Button x:Name="CreateGame" Content="Crear" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Background="#FF292929" Width="208" Height="73" BorderBrush="{x:Null}" Foreground="#FFECC601" FontSize="45"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="1995,555,0,0" Grid.Row="1" VerticalAlignment="Top" Width="0"/>
+        <Button Command="{Binding AddCardCommand, Mode=OneWay}" x:Name="CreateGame" Content="Crear" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Background="#FF292929" Width="208" Height="73" BorderBrush="{x:Null}" Foreground="#FFECC601" FontSize="45"/>
     </Grid>
 </UserControl>
