@@ -28,6 +28,23 @@ namespace model.DobbleGameSpace
         }
 
         /**
+        * <p> Getter.
+        * </p>
+        * @return una copia del Arreglo de cartas.
+        */
+        public List<List<string>> getCardsStringFormat()
+        {
+            List<Card> cSCopy = new(cardsSet);
+            List<List<string>> cards = new();
+            foreach (Card c in cSCopy)
+            {
+                List<string> elements = c.getElementsStringFormat();
+                cards.Add(elements);
+            }
+            return cards;
+        }
+
+        /**
         * <p> Setter, que cambia this.cardsSet por una copia de la nueva lista de 
         *       cartas verificando que esta cumpla con ser un conjunto de 
         *       cartas.

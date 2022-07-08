@@ -122,6 +122,16 @@ namespace model.DobbleGameSpace
         }
 
         /**
+        * <p> Getter.
+        * </p>
+        * @return el conjunto de cartas en juego.
+        */
+        public List<List<string>> getCardsInPlayListStringFormat()
+        {
+            return cardsInPlay.getCardsStringFormat();
+        }
+
+        /**
         * <p> Setter, cambia el mazo de cartas Dobble por uno dado.
         * </p>
         * @param dobbleSet mazo de cartas a agregar.

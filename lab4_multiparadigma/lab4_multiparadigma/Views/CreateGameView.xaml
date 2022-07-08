@@ -104,6 +104,6 @@
             <Label Grid.Row="2" Grid.Column="1" x:Name="MaxPlayersLabel" Content="Maximos jugadores a registrar" Style="{DynamicResource LabelStyle}"/>
             <TextBox Text="{Binding MaxPlayers}" Grid.Row="2" Grid.Column="1" x:Name="MaxPlayersTextBox" Style="{DynamicResource TextBoxStyle}"/>
         </Grid>
-        <Button Command="{Binding AddCardCommand, Mode=OneWay}" x:Name="CreateGame" Content="Crear" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Background="#FF292929" Width="208" Height="73" BorderBrush="{x:Null}" Foreground="#FFECC601" FontSize="45"/>
+        <Button Command="{Binding AddCardCommand, Mode=OneWay}" x:Name="CreateGame" Content="Crear" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Background="#FF292929" Width="208" Height="80" BorderBrush="{x:Null}" Foreground="#FFECC601" FontSize="45"/>
     </Grid>
 </UserControl>

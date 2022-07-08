@@ -54,6 +54,22 @@ namespace model.DobbleGameSpace
         }
 
         /**
+        * <p> Getter.
+        * </p>
+        * @return una copia del Arreglo de elementos en su formato String.
+        */
+        public List<string> getElementsStringFormat()
+        {
+            List<Element> eSCopy = new(elementsSet);
+            List<string> elements = new List<string>();
+            foreach (Element e in eSCopy)
+            {
+                elements.Add(e.ToString());
+            }
+            return elements;
+        }
+
+        /**
         * <p> Setter, que cambia this.elements por una copia de la nueva lista de 
         *       elementos verificando que esta cumpla con ser un conjunto de 
         *       elementos.

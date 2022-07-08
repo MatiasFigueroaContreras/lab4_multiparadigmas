@@ -482,6 +482,16 @@ namespace model.DobbleGameSpace
         }
 
         /**
+        * <p> Consulta si el juego esta inciado
+        * </p>
+        * @return true si el juego esta iniciado, false sino lo esta.
+        */
+        public bool isStarted()
+        {
+            return (!status.Equals("Esperando inicio del juego") && !isFinished());
+        }
+
+        /**
         * <p> Pide al Area de juego las cartas en juego representada en string.
         * </p>
         * @return cartas en juego representadas en string.
@@ -490,6 +500,11 @@ namespace model.DobbleGameSpace
         {
             return gameArea.cardsInPlayToString();
         }
+
+        public List<List<string>> getCardsInPlay()
+        {
+            return gameArea.getCardsInPlayListStringFormat();
+        }  
 
         /**
         * <p> Getter.
@@ -537,6 +552,14 @@ namespace model.DobbleGameSpace
             throw new DobbleGameException(503, "El juego aun no ha terminado.");
         }
 
+        public string getGameResults()
+        {
+            string winners = "Ganadores:\n" + playersGameControl.getWinners().ToString();
+            string losers = "Perdedores:\n" + playersGameControl.getLosers().ToString();
+            string results = "Resultados Finales:\n" + winners + "\n" + losers;
+            return results;
+        }
+
         /**
         * <p> Getter.
         * </p>
@@ -581,10 +604,7 @@ namespace model.DobbleGameSpace
             string strFinal = gameName + modeName + jump + st + jump + cards + jump + players;
             if (status == "Juego Terminado")
             {
-                string winners = "Ganadores:\n" + playersGameControl.getWinners();
-                string losers = "Perdedores:\n" + playersGameControl.getLosers();
-                string results = "Resultados Finales:\n" + winners + "\n" + losers;
-                strFinal += jump + results;
+                strFinal += jump + getGameResults();
             }
             return strFinal;
         }

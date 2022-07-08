@@ -164,7 +164,7 @@ namespace model.DobbleGameSpace
         */
         public override string getVersionModeName()
         {
-            return "Player vs CPU";
+            return "Player VS CPU";
         }
 
         /**

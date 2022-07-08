@@ -30,7 +30,7 @@ namespace lab4_multiparadigma.ViewModels
             this._dobbleGamesSet = dobbleGamesSet;
         }
 
-        public String GameName
+        public string GameName
         {
             get
             {
@@ -46,7 +46,7 @@ namespace lab4_multiparadigma.ViewModels
             }
         }
 
-        public String NumberCards
+        public string NumberCards
         {
             get
             {
@@ -82,7 +82,7 @@ namespace lab4_multiparadigma.ViewModels
             }
         }
 
-        public String NumberElements
+        public string NumberElements
         {
             get
             {
@@ -105,7 +105,7 @@ namespace lab4_multiparadigma.ViewModels
             }
         }
 
-        public String GameTime
+        public string GameTime
         {
             get
             {
@@ -164,8 +164,8 @@ namespace lab4_multiparadigma.ViewModels
             try
             {
                 _dobbleGamesSet.add(_gameName, _maxPlayers, _gameMode, new List<string>(), _numberElements, _numberCards, _gameTime);
-                //Mandar al juego recien creado
-                Initial(null);
+                MessageBox.Show("Juego creado con exito!!");
+                Initial(null); //Mandar al juego recien creado
             }
             catch (DobbleGamesSetException e)
             {

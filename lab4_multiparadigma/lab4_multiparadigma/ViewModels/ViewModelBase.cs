@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace lab4_multiparadigma.ViewModels
 {
-    //Clase base que permite manejar eventos principalmente que ocurran entre la Vista y la VistaModelo
+    //Clase base que permite manejar eventos principalmente que ocurran entre la Vista y la VistaModelo***
     // estos eventos son escencialmente cambio en propiedades/atributos de la Vista y VistaModelo
     public class ViewModelBase : INotifyPropertyChanged
     {

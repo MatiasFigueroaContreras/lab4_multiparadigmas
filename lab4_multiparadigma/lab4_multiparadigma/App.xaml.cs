@@ -20,9 +20,17 @@ namespace lab4_multiparadigma
         {
             base.OnStartup(e);
             NavigationStore navigationStore = new();
-            DobbleGamesSet dobbleGameSet = new();
+            DobbleGamesSet dobbleGamesSet = new();
+            dobbleGamesSet.add("Prueba", 1, "Stack Player VS CPU", new List<string>(), 3, 7, 100);
+            dobbleGamesSet.add("Prueba 2", 1, "Stack Player VS CPU", new List<string>(), 3, 7, 200);
+            dobbleGamesSet.add("Prueba 3", 1, "Stack Player VS CPU", new List<string>(), 3, 7, 100);
+            dobbleGamesSet.getGame(2).register("ManttiuS");
+            dobbleGamesSet.getGame(2).start();
+            dobbleGamesSet.getGame(2).finish();
+            dobbleGamesSet.getGame(3).register("ManttiuS");
+            dobbleGamesSet.getGame(3).start();
 
-            navigationStore.CurrentViewModel = new InitialViewModel(navigationStore, dobbleGameSet);
+            navigationStore.CurrentViewModel = new InitialViewModel(navigationStore, dobbleGamesSet);
             MainWindow MainWindow = new();
             MainWindowViewModel DataContext = new(navigationStore);
             MainWindow.DataContext = DataContext;
