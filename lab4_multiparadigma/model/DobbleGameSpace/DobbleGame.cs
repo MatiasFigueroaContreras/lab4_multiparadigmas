@@ -531,7 +531,7 @@ namespace model.DobbleGameSpace
         {
             if (status.Equals("Juego Terminado"))
             {
-                return playersGameControl.getWinners().ToString();
+                return playersGameControl.getWinnersString();
             }
 
             throw new DobbleGameException(503, "El juego aun no ha terminado.");
@@ -546,7 +546,7 @@ namespace model.DobbleGameSpace
         {
             if (status.Equals("Juego Terminado"))
             {
-                return playersGameControl.getLosers().ToString();
+                return playersGameControl.getLosersString();
             }
 
             throw new DobbleGameException(503, "El juego aun no ha terminado.");
@@ -554,8 +554,8 @@ namespace model.DobbleGameSpace
 
         public string getGameResults()
         {
-            string winners = "Ganadores:\n" + playersGameControl.getWinners().ToString();
-            string losers = "Perdedores:\n" + playersGameControl.getLosers().ToString();
+            string winners = "Ganadores:\n" + getWinners();
+            string losers = "Perdedores:\n" + getLosers();
             string results = "Resultados Finales:\n" + winners + "\n" + losers;
             return results;
         }

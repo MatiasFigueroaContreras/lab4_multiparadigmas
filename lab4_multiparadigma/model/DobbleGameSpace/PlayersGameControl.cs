@@ -274,6 +274,23 @@ namespace model.DobbleGameSpace
         }
 
         /**
+        * <p> Getter, obtiene el/los jugadores que tienen el mayor puntaje.
+        * </p>
+        * @return string con los jugadores que ganaron/ estan ganando.
+        */
+        public string getWinnersString()
+        {
+            List<string> winnersList = getWinners();
+            string winners = winnersList[0];
+            for(int i = 1; i < winnersList.Count; i++)
+            {
+                winners += ", " + winnersList[i];
+            }
+
+            return winners;
+        }
+
+        /**
         * <p> Getter, obtiene el/los jugadores que estan por debajo del mayor
         *       puntaje.
         * </p>
@@ -291,6 +308,24 @@ namespace model.DobbleGameSpace
                     losers.Add(nPlayer.getName());
                 }
             }
+            return losers;
+        }
+
+        /**
+        * <p> Getter, obtiene el/los jugadores que estan por debajo del mayor
+        *       puntaje.
+        * </p>
+        * @return string con los jugadores que perdieron/ estan perdiendo.
+        */
+        public string getLosersString()
+        {
+            List<string> losersList = getLosers();
+            string losers = losersList[0];
+            for (int i = 1; i < losersList.Count; i++)
+            {
+                losers += ", " + losersList[i];
+            }
+
             return losers;
         }
 

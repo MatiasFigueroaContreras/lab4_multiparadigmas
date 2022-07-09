@@ -61,7 +61,7 @@ namespace model
 
         public int getSeconds(int i)
         {
-            return gamesSeconds[i];
+            return gamesSeconds[i - 1];
         }
 
         public void setGameSeconds(DobbleGame game, int seconds)
