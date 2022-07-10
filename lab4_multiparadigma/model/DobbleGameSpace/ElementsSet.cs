@@ -11,8 +11,8 @@ namespace model.DobbleGameSpace
     internal class ElementsSet : IElementsSet
     {
         /**
-* El conjunto de elementos implementado como un ArrayList.
-*/
+        * El conjunto de elementos implementado como un ArrayList.
+        */
         protected List<Element> elementsSet;
 
         /**
@@ -262,6 +262,22 @@ namespace model.DobbleGameSpace
                 }
             }
             return false;
+        }
+
+        /**
+        * <p> Obtiene un ElementsSet con los elementos desde el punto de partida hasta la cantidad de elementos
+        *       en total
+        * </p>
+        * @param start punto de partida.
+        * @param amount cantidad de elementos
+        * @return lista de elementos desde el punto de partida hasta el punto de partida + amount.
+        */
+        public ElementsSet getRange(int start, int amount)
+        {
+            ElementsSet elementsResult = new ElementsSet();
+            List<Element> list = this.elementsSet.GetRange(start - 1, amount);
+            elementsResult.setElements(list);
+            return elementsResult;
         }
 
         /**

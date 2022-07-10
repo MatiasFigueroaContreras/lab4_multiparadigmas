@@ -14,7 +14,7 @@ namespace model.DobbleGameSpace
         public void play(string option, string[] data);
         public void finish();
         public void register(string name);
-        public string whoseTurnIsIt();
+        public string? whoseTurnIsIt();
         public int getScore(string name);
         public string getNameOfMode();
         public string getVersionMode();

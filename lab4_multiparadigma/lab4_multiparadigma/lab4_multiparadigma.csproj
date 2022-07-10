@@ -8,6 +8,252 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Buttons\arrow_back.png" />
+    <None Remove="Resources\Images\Buttons\close.png" />
+    <None Remove="Resources\Images\Buttons\menu.png" />
+    <None Remove="Resources\Images\Elements\airport_shuttle.png" />
+    <None Remove="Resources\Images\Elements\blender.png" />
+    <None Remove="Resources\Images\Elements\breakfast_dining.png" />
+    <None Remove="Resources\Images\Elements\brunch_dining.png" />
+    <None Remove="Resources\Images\Elements\coffee.png" />
+    <None Remove="Resources\Images\Elements\coffee_maker.png" />
+    <None Remove="Resources\Images\Elements\cooking.png" />
+    <None Remove="Resources\Images\Elements\devices.png" />
+    <None Remove="Resources\Images\Elements\dining.png" />
+    <None Remove="Resources\Images\Elements\dinner_dining.png" />
+    <None Remove="Resources\Images\Elements\directions_bike.png" />
+    <None Remove="Resources\Images\Elements\directions_bus.png" />
+    <None Remove="Resources\Images\Elements\directions_car.png" />
+    <None Remove="Resources\Images\Elements\directions_railway.png" />
+    <None Remove="Resources\Images\Elements\directions_run.png" />
+    <None Remove="Resources\Images\Elements\directions_subway.png" />
+    <None Remove="Resources\Images\Elements\directions_walk.png" />
+    <None Remove="Resources\Images\Elements\flight.png" />
+    <None Remove="Resources\Images\Elements\flight_land.png" />
+    <None Remove="Resources\Images\Elements\flight_takeoff.png" />
+    <None Remove="Resources\Images\Elements\headphones.png" />
+    <None Remove="Resources\Images\Elements\headset_mic.png" />
+    <None Remove="Resources\Images\Elements\hiking.png" />
+    <None Remove="Resources\Images\Elements\icecream.png" />
+    <None Remove="Resources\Images\Elements\liquor.png" />
+    <None Remove="Resources\Images\Elements\local_bar.png" />
+    <None Remove="Resources\Images\Elements\local_cafe.png" />
+    <None Remove="Resources\Images\Elements\local_shipping.png" />
+    <None Remove="Resources\Images\Elements\local_taxi.png" />
+    <None Remove="Resources\Images\Elements\lunch_dining.png" />
+    <None Remove="Resources\Images\Elements\motorcycle.png" />
+    <None Remove="Resources\Images\Elements\nightlife.png" />
+    <None Remove="Resources\Images\Elements\nordic_walking.png" />
+    <None Remove="Resources\Images\Elements\outdoor_grill.png" />
+    <None Remove="Resources\Images\Elements\pedal_bike.png" />
+    <None Remove="Resources\Images\Elements\phone_android.png" />
+    <None Remove="Resources\Images\Elements\phone_iphone.png" />
+    <None Remove="Resources\Images\Elements\ramen_dining.png" />
+    <None Remove="Resources\Images\Elements\smartphone.png" />
+    <None Remove="Resources\Images\Elements\snowmobile.png" />
+    <None Remove="Resources\Images\Elements\snowshoeing.png" />
+    <None Remove="Resources\Images\Elements\sports_bar.png" />
+    <None Remove="Resources\Images\Elements\sports_baseball.png" />
+    <None Remove="Resources\Images\Elements\sports_basketball.png" />
+    <None Remove="Resources\Images\Elements\sports_football.png" />
+    <None Remove="Resources\Images\Elements\sports_gymnastics.png" />
+    <None Remove="Resources\Images\Elements\sports_handball.png" />
+    <None Remove="Resources\Images\Elements\sports_martial_arts.png" />
+    <None Remove="Resources\Images\Elements\sports_rugby.png" />
+    <None Remove="Resources\Images\Elements\sports_soccer.png" />
+    <None Remove="Resources\Images\Elements\sports_volleyball.png" />
+    <None Remove="Resources\Images\Elements\tablet_android.png" />
+    <None Remove="Resources\Images\Elements\tablet_mac.png" />
+    <None Remove="Resources\Images\Elements\tapas.png" />
+    <None Remove="Resources\Images\Elements\train.png" />
+    <None Remove="Resources\Images\Elements\tram.png" />
+    <None Remove="Resources\Images\Elements\two_wheeler.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\arrow_back.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\menu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\airport_shuttle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\blender.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\breakfast_dining.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\brunch_dining.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\coffee.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\coffee_maker.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\cooking.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\devices.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\dining.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\dinner_dining.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\directions_bike.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\directions_bus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\directions_car.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\directions_railway.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\directions_run.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\directions_subway.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\directions_walk.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\flight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\flight_land.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\flight_takeoff.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\headphones.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\headset_mic.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\hiking.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\icecream.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\liquor.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\local_bar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\local_cafe.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\local_shipping.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\local_taxi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\lunch_dining.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\motorcycle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\nightlife.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\nordic_walking.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\outdoor_grill.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\pedal_bike.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\phone_android.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\phone_iphone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\ramen_dining.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\smartphone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\snowmobile.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\snowshoeing.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\sports_bar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\sports_baseball.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\sports_basketball.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\sports_football.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\sports_gymnastics.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\sports_handball.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\sports_martial_arts.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\sports_rugby.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\sports_soccer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\sports_volleyball.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\tablet_android.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\tablet_mac.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\tapas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\train.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\tram.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Elements\two_wheeler.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\model\model.csproj" />
   </ItemGroup>
 

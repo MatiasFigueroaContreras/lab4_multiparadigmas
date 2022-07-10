@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace lab4_multiparadigma.Resources
+namespace lab4_multiparadigma.Resources.Helpers
 {
     public class RadialPanel : Panel
     {
@@ -16,10 +16,7 @@ namespace lab4_multiparadigma.Resources
             foreach (UIElement element in Children)
 
             {
-
-
                 element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-
             }
 
             return base.MeasureOverride(availableSize);
@@ -36,14 +33,14 @@ namespace lab4_multiparadigma.Resources
 
 
             double _angle = 0;
-            double _incrementalAngularSpace = (360.0 / Children.Count) * (Math.PI / 180);
+            double _incrementalAngularSpace = 360.0 / Children.Count * (Math.PI / 180);
             double radiusX = finalSize.Width / 2;
             double radiusY = finalSize.Height / 2;
 
             foreach (UIElement element in Children)
 
             {
-                Point childPoint = new Point(Math.Cos(_angle) * radiusX/2, -Math.Sin(_angle) * radiusY/2);
+                Point childPoint = new Point(Math.Cos(_angle) * radiusX / 1.5, -Math.Sin(_angle) * radiusY / 1.5);
                 Point actualChildPoint = new Point(finalSize.Width / 2 + childPoint.X - element.DesiredSize.Width / 2, finalSize.Height / 2 + childPoint.Y - element.DesiredSize.Height / 2);
                 element.Arrange(new Rect(actualChildPoint.X, actualChildPoint.Y, element.DesiredSize.Width, element.DesiredSize.Height));
                 _angle += _incrementalAngularSpace;

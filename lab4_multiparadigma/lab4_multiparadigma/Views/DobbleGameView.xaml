@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="lab4_multiparadigma.Views.DobbleGameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:lab4_multiparadigma.Views"
+             xmlns:helpers="clr-namespace:lab4_multiparadigma.Resources.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="1024" d:DesignWidth="1440">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+        <helpers:NameToBitmapImageConverter x:Key="NameToBitmapImageConverter" />
+        <SolidColorBrush x:Key="TextBox.Static.Background" Color="#FF4B4B4B"/>
+        <SolidColorBrush x:Key="TextBox.Static.Foreground" Color="White"/>
+        <SolidColorBrush x:Key="TextBox.Static.Border"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FFECC601"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FFECC601"/>
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{StaticResource TextBox.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBox.Static.Foreground}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="FontFamily" Value="Baskerville Old Face"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="64,0,0,0"/>
+            <Setter Property="Width" Value="486"/>
+            <Setter Property="Height" Value="64"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ItemsPanelTemplate x:Key="RadialTemplate">
+            <helpers:RadialPanel />
+
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="CardElementsTemplate">
+            <Button Command="{Binding DataContext.PlayElementCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Panel}}}" CommandParameter="{Binding}" Width="62" Height="62" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                <Image Source="{Binding Converter={StaticResource NameToBitmapImageConverter}}"/>
+            </Button>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+
+    <Grid Background="Black">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Button Panel.ZIndex="1" Command="{Binding NavigateBackCommand}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60" Margin="60,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                <Image Source="../Resources/Images/Buttons/arrow_back.png" />
+            </Button>
+            <Label Grid.Row="0" x:Name="Tittle" Content="DobbleGame" HorizontalAlignment="Center" Margin="0,15,0,0" VerticalAlignment="Top" Height="146" Width="594" Foreground="#FFECC601" FontSize="100"/>
+            <Button Grid.Row="0" Panel.ZIndex="1" Command="{Binding ShowPanelCommand}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="60" Height="60" Margin="0, 0, 60, 0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                <Image Source="../Resources/Images/Buttons/menu.png" />
+            </Button>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="Status" Grid.Row="0" Content="{Binding GameStatus}" Foreground="White" FontFamily="Baskerville Old Face" FontSize="55" HorizontalAlignment="Center"/>
+                    <Label x:Name="Timer" Grid.Row="1" Content="{Binding Timer}" Foreground="White" FontFamily="Baskerville Old Face" FontSize="55" HorizontalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="1" Margin="3,0,-3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="1" Content="Dobble" Panel.ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="55" BorderThickness="3,3,3,3" FontStyle="Normal" FontWeight="SemiBold" Margin="-2,0,0,0" Foreground="White" Background="{x:Null}"/>
+                    <Ellipse Grid.Column="1" Stroke="#FFECC601" HorizontalAlignment="Center" VerticalAlignment="Center" Width="340" Height="340"  Fill="#FFD4B203" />
+                    <Grid Grid.Column="0" Visibility="{Binding IsCardsInPlay, Converter={StaticResource BooleanToVisibility}}" Width="340" Height="340"  >
+                        <Ellipse Grid.Column="1" Stroke="#FFECC601" StrokeThickness="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="340" Height="340" Fill="White" />
+                        <ItemsControl ItemsSource="{Binding CardElements1}" ItemTemplate="{DynamicResource CardElementsTemplate}" ItemsPanel="{DynamicResource RadialTemplate}"/>
+                    </Grid>
+                    <Grid Grid.Column="3" Visibility="{Binding IsCardsInPlay, Converter={StaticResource BooleanToVisibility}}" Width="340" Height="340" >
+                        <Ellipse Grid.Column="1" Stroke="#FFECC601" StrokeThickness="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="340" Height="340"  Fill="White" />
+                        <ItemsControl ItemsSource="{Binding CardElements2}" ItemTemplate="{DynamicResource CardElementsTemplate}" ItemsPanel="{DynamicResource RadialTemplate}"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="{Binding PlayerTurn}" x:Name="PlayerName" Foreground="White" FontFamily="Baskerville Old Face" FontSize="55" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="1" Content="{Binding PlayerScore}" x:Name="PlayerScore" Foreground="White" FontFamily="Baskerville Old Face" FontSize="40" HorizontalAlignment="Center"/>
+                </Grid>
+            </Grid>
+            <ListView Grid.Row="2" ItemsSource="{Binding PlaysOptions}" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Focusable" Value="False"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.PlayCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" Content="{Binding}" Background="#FF292929" Width="Auto" Height="80" BorderBrush="{x:Null}" Foreground="#FFECC601" FontSize="43"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Border HorizontalAlignment="Left" Height="1024" VerticalAlignment="Center" Width="674" Background="#FF1A1A1A" Visibility="{Binding IsSidePanelVisible, Converter={StaticResource BooleanToVisibility}}" Margin="766,0,0,0">
+            <Grid Margin="0,36,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="6*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Rectangle Height="3" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom"/>
+                    <Button Command="{Binding HidePanelCommand}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60" Margin="25, 0, 0, 0"  BorderBrush="{x:Null}" Background="{x:Null}" >
+                        <Image Source="../Resources/Images/Buttons/close.png"></Image>
+                    </Button>
+                    <Label Content="Menú" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFECC601" FontSize="65"/>
+                </Grid>
+                <Grid Grid.Row="1" Margin="45,0,40,0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="{Binding GameName}" Foreground="White" FontSize="40" VerticalAlignment="Center"/>
+                    <Label Grid.Row="1" Content="{Binding GameMode}" Foreground="White" FontSize="40"/>
+                </Grid>
+                <Grid Grid.Row="2" Margin="45,0,40,0">
+                    <Button Command="{Binding RegisteredPlayersCommand}" Content="Jugadores Registrados" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="40"  Width="451" Height="75" Background="#FF353434" BorderBrush="{x:Null}" Foreground="White"/>
+                    <Grid x:Name="NotStartedGame" Visibility="{Binding IsNotStartedGame, Converter={StaticResource BooleanToVisibility}}" Margin="0,115,0,0" >
+                        <Canvas Height="200" VerticalAlignment="Top">
+                            <Label Content="Registrar Jugador" Foreground="White" FontSize="40"/>
+                            <TextBox Text="{Binding PlayerToRegister}" Style="{StaticResource TextBoxStyle}" Margin="0,72,0,0" VerticalAlignment="Top" Width="452"/>
+                            <Button Command="{Binding RegisterPlayerCommand}" Background="#FF353434" Width="62" Height="62" Margin="446,73,81,409" BorderBrush="{x:Null}"/>
+                        </Canvas>
+                        <Button Command="{Binding StartGameCommand}" Content="Iniciar Juego" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF292929" Width="360" Height="80" BorderBrush="{x:Null}" Foreground="#FFECC601" FontSize="43" Margin="0,388,0,0"/>
+                    </Grid>
+                    <Grid x:Name="StartedOrFinishedGame" Visibility="{Binding IsStartedOrFinishedGame, Converter={StaticResource BooleanToVisibility}}" Margin="0,115,0,0">
+                        <Button Command="{Binding GeneralGameInformationCommand}" Content="Informacion General   " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="40"  Width="451" Height="75" Background="#FF353434" BorderBrush="{x:Null}" Foreground="White" Margin="0,36,0,0"/>
+                        <Canvas Height="200" Margin="0,146,0,198">
+                            <Label Content="Puntaje de Jugador" Foreground="White" FontSize="40"/>
+                            <TextBox Text="{Binding PlayerToGetScore}" Style="{StaticResource TextBoxStyle}" Margin="0,72,0,0" VerticalAlignment="Top" Width="452"/>
+                            <Button Command="{Binding GetPlayerScoreCommand}" Background="#FF353434" Width="62" Height="62" Margin="446,73,81,409" BorderBrush="{x:Null}"/>
+                        </Canvas>
+                    </Grid>
+                    <Button Command="{Binding FinishGameCommand}" x:Name="FinishGame" Visibility="{Binding IsStartedGame, Converter={StaticResource BooleanToVisibility}}" Content="Terminar Juego" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF292929" Width="360" Height="80" BorderBrush="{x:Null}" Foreground="#FFECC601" FontSize="43" Margin="0,505,0,0"/>
+                    <Button Command="{Binding GameResultsCommand}" x:Name="Results" Visibility="{Binding IsFinishedGame, Converter={StaticResource BooleanToVisibility}}" Content="Resultados" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF292929" Width="264" Height="80" BorderBrush="{x:Null}" Foreground="#FFECC601" FontSize="43" Margin="0,505,0,0"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

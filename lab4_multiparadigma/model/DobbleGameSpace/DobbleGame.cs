@@ -67,10 +67,28 @@ namespace model.DobbleGameSpace
             }
             else
             {
-                throw new DobbleGameException(400, "El maximo de jugadores a registrar no concuerda con el modo de juego escogido.");
+                throw new DobbleGameException(401, "El maximo de jugadores a registrar no concuerda con el modo de juego escogido. maximo: " + m.getMaxPlayers() + ", minimo: " + m.getMinPlayers());
             }
+
+            if(gameName == null || gameName.Replace(" ", "").Length == 0)
+            {
+                throw new DobbleGameException(402, "Nombre de juego no valido.");
+            }
+            if (maxC < 2 && maxC > 0)
+            {
+                throw new DobbleGameException(403, "Numero de cartas no valido.");
+            }
+
             name = gameName;
-            gameArea = new GameArea(elements, numE, maxC);
+            try
+            {
+                gameArea = new GameArea(elements, numE, maxC);
+            }
+            catch(DobbleException e)
+            {
+                throw new DobbleGameException(404, e.Message);
+            }
+            
             this.mode = m;
         }
 
@@ -144,13 +162,16 @@ namespace model.DobbleGameSpace
         */
         public void start()
         {
-            if (status.Equals("Esperando inicio del juego") && playersGameControl.getTotalPlayers() >= mode.getMinPlayers())
+            if(!status.Equals("Esperando inicio del juego")){
+                throw new DobbleGameException(500, "Juego ya iniciado, o terminado.");
+            }
+            else if(playersGameControl.getTotalPlayers() < mode.getMinPlayers())
             {
-                status = mode.start(this);
+                throw new DobbleGameException(503, String.Format("Faltan {0} jugadores por registrar.", mode.getMinPlayers() - playersGameControl.getTotalPlayers()));
             }
             else
             {
-                throw new DobbleGameException(500, "Juego ya iniciado, o terminado.");
+                status = mode.start(this);
             }
         }
 
@@ -205,11 +226,12 @@ namespace model.DobbleGameSpace
         }
 
         /**
-        * <p> Termina el juego cambiando el estado de este.
+        * <p> Termina el juego cambiando el estado de este y volviendo las cartas en juego.
         * </p>
         */
         public void finish()
         {
+            backCardsInPlay();
             status = "Juego Terminado";
         }
 
@@ -379,9 +401,16 @@ namespace model.DobbleGameSpace
         * </p>
         * @return nombre del jugador al cual le toca jugar.
         */
-        public string whoseTurnIsIt()
+        public string? whoseTurnIsIt()
         {
-            return playersGameControl.getPlayerTurn();
+            if(isStarted())
+            {
+                return playersGameControl.getPlayerTurn();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /**

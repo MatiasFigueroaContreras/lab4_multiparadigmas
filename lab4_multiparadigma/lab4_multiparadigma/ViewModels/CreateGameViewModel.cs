@@ -1,4 +1,5 @@
 ﻿using lab4_multiparadigma.Commands;
+using lab4_multiparadigma.Resources.Helpers;
 using lab4_multiparadigma.Stores;
 using model;
 using model.DobbleGameSpace;
@@ -163,9 +164,14 @@ namespace lab4_multiparadigma.ViewModels
         {
             try
             {
-                _dobbleGamesSet.add(_gameName, _maxPlayers, _gameMode, new List<string>(), _numberElements, _numberCards, _gameTime);
-                MessageBox.Show("Juego creado con exito!!");
-                Initial(null); //Mandar al juego recien creado
+                List<string> elements = ImageElements.Elements;
+                int totalCards = DobbleGame.totalCardsNumElements(_numberElements);
+                Random random = new Random();
+                int i = (int)random.NextInt64(elements.Count - totalCards);
+                List<string> dobbleGameElements = elements.GetRange(i, totalCards);
+                _dobbleGamesSet.add(_gameName, _maxPlayers, _gameMode, dobbleGameElements, _numberElements, _numberCards, _gameTime);
+                MessageBox.Show("Juego creado con exito!");
+                _navigationStore.CurrentViewModel = new DobbleGameViewModel(_navigationStore, _dobbleGamesSet, _dobbleGamesSet.length());
             }
             catch (DobbleGamesSetException e)
             {
@@ -181,17 +187,18 @@ namespace lab4_multiparadigma.ViewModels
 
         }
 
-        public ICommand NavigateInitialCommand
+        public ICommand NavigateBackCommand
         {
             get
             {
-                return new RelayCommand(new Action<object>(Initial));
+                return new RelayCommand(new Action<object>(NavigateBack));
             }
         }
 
-        public void Initial(object? obj)
+        public void NavigateBack(object? obj)
         {
             _navigationStore.CurrentViewModel = new InitialViewModel(_navigationStore, _dobbleGamesSet);
         }
+
     }
 }

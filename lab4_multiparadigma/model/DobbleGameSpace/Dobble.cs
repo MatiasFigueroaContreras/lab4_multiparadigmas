@@ -51,6 +51,10 @@ namespace model.DobbleGameSpace
                 initElementsAppearances();
                 this.numE = numE;
             }
+            else
+            {
+                throw new DobbleException(400, "Numero de elementos no valido.");
+            }
         }
 
         /**
@@ -63,7 +67,14 @@ namespace model.DobbleGameSpace
         */
         public Dobble(ElementsSet elements, int numE) : this(numE)
         {
-            this.elements = elements;
+            if(elements.numElements() > totalCardsNumElements(numE))
+            {
+                this.elements = elements.getRange(1, totalCardsNumElements(numE));
+            }
+            else
+            {
+                this.elements = elements;
+            }
         }
 
         /**
@@ -82,8 +93,17 @@ namespace model.DobbleGameSpace
             if (elements.numElements() < totalCards)
             {
                 elements.insertXElements(totalCards - elements.numElements());
+                this.elements = elements;
             }
-            this.elements = elements;
+            else if(elements.numElements() > totalCardsNumElements(numE))
+            {
+                this.elements = elements.getRange(1, totalCardsNumElements(numE));
+            }
+            else
+            {
+                this.elements = elements;
+            }
+            
             initDobbleCards(maxC);
         }
 
@@ -104,8 +124,16 @@ namespace model.DobbleGameSpace
             if (eS.numElements() < totalCards)
             {
                 eS.insertXElements(totalCards - eS.numElements());
+                this.elements = eS;
             }
-            this.elements = eS;
+            else if(eS.numElements() > totalCardsNumElements(numE))
+            {
+                this.elements = eS.getRange(1, totalCardsNumElements(numE));
+            }
+            else
+            {
+                this.elements = eS;
+            }
             initDobbleCards(maxC);
         }
 

@@ -278,16 +278,21 @@ namespace model.DobbleGameSpace
         * </p>
         * @return string con los jugadores que ganaron/ estan ganando.
         */
-        public string getWinnersString()
+        public string? getWinnersString()
         {
+            
             List<string> winnersList = getWinners();
-            string winners = winnersList[0];
-            for(int i = 1; i < winnersList.Count; i++)
+            if (winnersList.Count > 0)
             {
-                winners += ", " + winnersList[i];
-            }
+                string winners = winnersList[0];
+                for (int i = 1; i < winnersList.Count; i++)
+                {
+                    winners += ", " + winnersList[i];
+                }
 
-            return winners;
+                return winners;
+            }
+            return null;
         }
 
         /**
@@ -317,16 +322,20 @@ namespace model.DobbleGameSpace
         * </p>
         * @return string con los jugadores que perdieron/ estan perdiendo.
         */
-        public string getLosersString()
+        public string? getLosersString()
         {
             List<string> losersList = getLosers();
-            string losers = losersList[0];
-            for (int i = 1; i < losersList.Count; i++)
+            if(losersList.Count > 0)
             {
-                losers += ", " + losersList[i];
-            }
+                string losers = losersList[0];
+                for (int i = 1; i < losersList.Count; i++)
+                {
+                    losers += ", " + losersList[i];
+                }
 
-            return losers;
+                return losers;
+            }
+            return null;
         }
 
         /**

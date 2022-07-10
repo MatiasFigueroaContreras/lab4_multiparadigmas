@@ -72,5 +72,10 @@ namespace model
             }
             this.gamesSeconds[getGameIndex(game)] = seconds;
         }
+
+        public int length()
+        {
+            return games.Count;
+        }
     }
 }

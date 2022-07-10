@@ -71,7 +71,10 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" x:Name="Tittle" Content="Crear Juego" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Height="146" Width="535" Foreground="#FFECC601" FontSize="100" FontFamily="Segoe UI"/>
+        <Button Command="{Binding NavigateBackCommand}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60"  Margin="60,0,0,0" Background="Black" BorderBrush="{x:Null}" Foreground="{x:Null}">
+            <Image Panel.ZIndex="1" Source="../Resources/Images/Buttons/arrow_back.png" />
+        </Button>
+        <Label Grid.Row="0" x:Name="Tittle" Content="Crear Juego" HorizontalAlignment="Center" Margin="0,7,0,0" VerticalAlignment="Top" Height="146" Width="536" Foreground="#FFECC601" FontSize="100" FontFamily="Segoe UI"/>
         <Grid Grid.Row="1" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
