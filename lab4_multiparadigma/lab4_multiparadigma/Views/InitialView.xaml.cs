@@ -16,6 +16,8 @@ namespace lab4_multiparadigma.Views
 {
     /// <summary>
     /// Lógica de interacción para InitialView.xaml
+    ///     -> manejada por InitialViewModel.cs mediante
+    ///         comandos y eventos
     /// </summary>
     public partial class InitialView : UserControl
     {

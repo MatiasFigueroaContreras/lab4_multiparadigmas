@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace lab4_multiparadigma.Resources.Helpers
 {
+    /// <summary>
+    /// Esta clase solo esta creada para contener y otorgar la lista de 
+    ///     elementos estática, con los nombres de las imágenes que existen 
+    ///     en los recursos.
+    /// </summary>
     public class ImageElements
     {
+        /// <summary>
+        /// Elementos con los nombres de las imagenes que existen en los
+        ///     recursos.
+        /// </summary>
         private static string[] _elements = { "airport_shuttle",
                                             "blender",
                                             "breakfast_dining",
@@ -65,6 +74,10 @@ namespace lab4_multiparadigma.Resources.Helpers
                                             "train",
                                             "tram",
                                             "two_wheeler"};
+        /// <summary>
+        /// Elementos a obtener con los nombres de las imagenes que existen en los
+        ///     recursos.
+        /// </summary>
         public static List<string> Elements { get { return _elements.ToList(); } }
 
     }

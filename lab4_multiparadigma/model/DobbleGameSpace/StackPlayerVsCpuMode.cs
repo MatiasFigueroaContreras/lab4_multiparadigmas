@@ -207,5 +207,10 @@ namespace model.DobbleGameSpace
         {
             return o != null && o.GetType().Equals(GetType());
         }
+
+        public override string ToString()
+        {
+            return base.getModeName() + " " + getVersionModeName();
+        }
     }
 }

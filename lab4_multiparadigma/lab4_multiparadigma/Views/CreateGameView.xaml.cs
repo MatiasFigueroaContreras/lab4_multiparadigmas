@@ -16,6 +16,8 @@ namespace lab4_multiparadigma.Views
 {
     /// <summary>
     /// Lógica de interacción para CreateGameView.xaml
+    ///     ///     -> manejada por CreateGameViewModel.cs mediante
+    ///         comandos y eventos
     /// </summary>
     public partial class CreateGameView : UserControl
     {

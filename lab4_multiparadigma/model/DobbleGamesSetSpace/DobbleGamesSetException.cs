@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace model.DobbleGameSpace
+namespace model.DobbleGamesSetSpace
 {
-    public class DobbleGameException : Exception
+    public class DobbleGamesSetException : Exception
     {
         /// <summary>
         /// Codigo de la excepcion
         /// </summary>
-        private int _code;
+        private int code;
 
         /// <summary>
         /// Codigo de la excepcion a obtener.
         /// </summary>
-        public int Code { get { return _code; } }
+        public int Code { get { return code; } }
 
         /// <summary>
         /// Constructor con el mensaje y el codigo asociado a la excepcion
         /// </summary>
-        public DobbleGameException(int code, string message) : base(message)
+        public DobbleGamesSetException(int code, string message) : base(message)
         {
-            this._code = code;
+            this.code = code;
         }
     }
 }

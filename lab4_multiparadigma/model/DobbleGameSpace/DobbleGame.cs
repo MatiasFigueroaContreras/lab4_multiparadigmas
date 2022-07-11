@@ -92,33 +92,6 @@ namespace model.DobbleGameSpace
             this.mode = m;
         }
 
-        public string Name { get { return name; } }
-        public string Status { get { return status; } }
-        public string BasicStatus
-        {
-            get
-            {
-                if(Status.Equals("Esperando inicio del juego"))
-                {
-                    return "No Iniciado";
-                }
-                else if(Status.Equals("Juego Terminado"))
-                {
-                    return "Terminado";
-                }
-                else
-                {
-                    return "Iniciado";
-                }
-            }
-        }
-        
-        public string GameMode
-        {
-            get { return getNameOfMode() + getVersionMode(); }
-        }
-
-
         /**
         * <p> dado un String se�alando el modo, se crea este objeto Mode, si es que
         *       esta disponible para se inicializado.
@@ -134,6 +107,10 @@ namespace model.DobbleGameSpace
                 case "Stack Player VS CPU":
                     {
                         return new StackPlayerVsCpuMode();
+                    }
+                case "Stack Player VS Player":
+                    {
+                        return new StackPlayerVsPlayerMode();
                     }
                 default:
                     {

@@ -82,5 +82,6 @@ namespace model.DobbleGameSpace
         public abstract int getMaxPlayers();
         public abstract int getMinPlayers();
         public abstract int getExtraPlayers();
+        public abstract override string ToString();
     }
 }

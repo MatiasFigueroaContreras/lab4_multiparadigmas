@@ -8,7 +8,7 @@ using System.Windows;
 using lab4_multiparadigma.Resources.Helpers;
 using lab4_multiparadigma.Stores;
 using lab4_multiparadigma.ViewModels;
-using model;
+using model.DobbleGamesSetSpace;
 
 namespace lab4_multiparadigma
 {
@@ -17,20 +17,19 @@ namespace lab4_multiparadigma
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// En el inicio de la aplicacion crea el almacen de navegacion y el
+        ///     conjunto de juegos Dobble que seran utilizados a lo largo
+        ///     del programa, y asigna el contexto de la ventana principal
+        ///     el cual va a estar dado por el ViewModel en el que se encuentre
+        ///     esto hara que la vista sea la correspondiente a este ViewModel.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             NavigationStore navigationStore = new();
             DobbleGamesSet dobbleGamesSet = new();
-            dobbleGamesSet.add("Prueba", 1, "Stack Player VS CPU", ImageElements.Elements, 3, 7, 100);
-            dobbleGamesSet.add("Prueba 2", 1, "Stack Player VS CPU", ImageElements.Elements, 3, 7, 200);
-            dobbleGamesSet.add("Prueba 3", 1, "Stack Player VS CPU", ImageElements.Elements, 3, 7, 100);
-            dobbleGamesSet.getGame(2).register("ManttiuS");
-            dobbleGamesSet.getGame(2).start();
-            dobbleGamesSet.getGame(2).finish();
-            dobbleGamesSet.getGame(3).register("ManttiuS");
-            dobbleGamesSet.getGame(3).start();
-
             navigationStore.CurrentViewModel = new InitialViewModel(navigationStore, dobbleGamesSet);
             MainWindow MainWindow = new();
             MainWindowViewModel DataContext = new(navigationStore);

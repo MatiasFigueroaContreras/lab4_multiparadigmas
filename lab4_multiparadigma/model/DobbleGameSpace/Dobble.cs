@@ -194,6 +194,7 @@ namespace model.DobbleGameSpace
             for (int i = 1; i <= n + 1; i++)
             {
                 card.add(elements.nthElement(i));
+                card.mix();
                 elementsAppareances[i - 1]++;
             }
             dobbleCS.add(card);
@@ -217,6 +218,7 @@ namespace model.DobbleGameSpace
                     card.add(elements.nthElement(n * i + j + 1));
                     elementsAppareances[n * i + j + 1 - 1]++;
                 }
+                card.mix();
                 dobbleCS.add(card);
             }
         }
@@ -241,6 +243,7 @@ namespace model.DobbleGameSpace
                         card.add(elements.nthElement(n + 2 + n * (k - 1) + ((i - 1) * (k - 1) + j - 1) % n));
                         elementsAppareances[n + 2 + n * (k - 1) + ((i - 1) * (k - 1) + j - 1) % n - 1]++;
                     }
+                    card.mix();
                     dobbleCS.add(card);
                 }
             }

@@ -16,7 +16,9 @@ using System.Windows.Shapes;
 namespace lab4_multiparadigma.Views
 {
     /// <summary>
-    /// Lógica de interacción para CreatedGamesView.xaml
+    /// Lógica de interacción para CreatedGamesView.xaml 
+    ///     -> manejada por CreatedGamesViewModel.cs mediante
+    ///         comandos y eventos
     /// </summary>
     public partial class CreatedGamesView : UserControl
     {

@@ -8,9 +8,19 @@ using System.Windows.Controls;
 
 namespace lab4_multiparadigma.Resources.Helpers
 {
+    /// <summary>
+    /// (Recurso para la vista) Clase encargada de posicionar los elementos de un Panel, de forma radial
+    /// </summary>
+    /// <see href="http://jobijoy.blogspot.com/2008/04/simple-radial-panel-for-wpf-and.html?m=1">
+    ///     implementacion de referencia
+    /// </see>
     public class RadialPanel : Panel
     {
-        //Referencia http://jobijoy.blogspot.com/2008/04/simple-radial-panel-for-wpf-and.html?m=1
+        /// <summary>
+        /// Encargada de darle todo el tamaño posible a cada elemento.
+        /// </summary>
+        /// <param name="availableSize"></param>
+        /// <returns></returns>
         protected override Size MeasureOverride(Size availableSize)
         {
             foreach (UIElement element in Children)
@@ -22,6 +32,11 @@ namespace lab4_multiparadigma.Resources.Helpers
             return base.MeasureOverride(availableSize);
         }
 
+        /// <summary>
+        /// Encargado de posicionar los elementos en su posicion radial.
+        /// </summary>
+        /// <param name="finalSize"></param>
+        /// <returns></returns>
         protected override Size ArrangeOverride(Size finalSize)
 
         {

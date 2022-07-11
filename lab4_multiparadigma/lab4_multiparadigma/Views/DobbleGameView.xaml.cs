@@ -17,6 +17,8 @@ namespace lab4_multiparadigma.Views
 {
     /// <summary>
     /// Lógica de interacción para DobbleGameView.xaml
+    ///     -> manejada por DobbleGameViewModel.cs mediante
+    ///         comandos y eventos
     /// </summary>
     public partial class DobbleGameView : UserControl
     {

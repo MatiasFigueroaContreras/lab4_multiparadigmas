@@ -108,5 +108,13 @@ namespace model.DobbleGameSpace
         * @return true si son iguales, false si no son iguales.
         */
         public bool Equals(object? o);
+
+        /**
+        * <p> Compara this con otro Objeto.
+        * </p>
+        * @param object objeto a comparar con this.
+        * @return true si son iguales, false si no son iguales.
+        */
+        public string ToString();
     }
 }

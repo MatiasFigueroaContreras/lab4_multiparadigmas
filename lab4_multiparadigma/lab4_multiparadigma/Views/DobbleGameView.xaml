@@ -169,7 +169,18 @@
                         <Canvas Height="200" VerticalAlignment="Top">
                             <Label Content="Registrar Jugador" Foreground="White" FontSize="40"/>
                             <TextBox Text="{Binding PlayerToRegister}" Style="{StaticResource TextBoxStyle}" Margin="0,72,0,0" VerticalAlignment="Top" Width="452"/>
-                            <Button Command="{Binding RegisterPlayerCommand}" Background="#FF353434" Width="62" Height="62" Margin="446,73,81,409" BorderBrush="{x:Null}"/>
+                            <Button Command="{Binding RegisterPlayerCommand}" Background="#FF353434" Width="62" Height="62" Margin="446,73,81,409" BorderBrush="{x:Null}">
+                                <Image Source="../Resources/Images/Buttons/arrow_back.png" RenderTransformOrigin="0.5,0.5" Width="45" Height="45" HorizontalAlignment="Left" Margin="0,0,15,0">
+                                    <Image.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="180"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Image.RenderTransform>
+                                </Image>
+                            </Button>
                         </Canvas>
                         <Button Command="{Binding StartGameCommand}" Content="Iniciar Juego" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF292929" Width="360" Height="80" BorderBrush="{x:Null}" Foreground="#FFECC601" FontSize="43" Margin="0,388,0,0"/>
                     </Grid>
@@ -178,7 +189,18 @@
                         <Canvas Height="200" Margin="0,146,0,198">
                             <Label Content="Puntaje de Jugador" Foreground="White" FontSize="40"/>
                             <TextBox Text="{Binding PlayerToGetScore}" Style="{StaticResource TextBoxStyle}" Margin="0,72,0,0" VerticalAlignment="Top" Width="452"/>
-                            <Button Command="{Binding GetPlayerScoreCommand}" Background="#FF353434" Width="62" Height="62" Margin="446,73,81,409" BorderBrush="{x:Null}"/>
+                            <Button Command="{Binding GetPlayerScoreCommand}" Background="#FF353434" Width="62" Height="62" Margin="446,73,81,409" BorderBrush="{x:Null}">
+                                <Image Source="../Resources/Images/Buttons/arrow_back.png" RenderTransformOrigin="0.5,0.5" Width="45" Height="45" HorizontalAlignment="Left" Margin="0,0,15,0">
+                                    <Image.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="180"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Image.RenderTransform>
+                                </Image>
+                            </Button>
                         </Canvas>
                     </Grid>
                     <Button Command="{Binding FinishGameCommand}" x:Name="FinishGame" Visibility="{Binding IsStartedGame, Converter={StaticResource BooleanToVisibility}}" Content="Terminar Juego" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF292929" Width="360" Height="80" BorderBrush="{x:Null}" Foreground="#FFECC601" FontSize="43" Margin="0,505,0,0"/>

@@ -321,6 +321,23 @@ namespace model.DobbleGameSpace
             }
         }
 
+        /**
+        * <p> Revuelve los elementos en la carta.
+        * </p>
+        */
+        public void mix()
+        {
+            Random rand = new Random();
+            int randNumChanges = (int)(rand.NextInt64(numElements() * 2) + numElements());
+            for (int i = 1; i <= randNumChanges; i++)
+            {
+                int n = (int)rand.NextInt64(1, numElements());
+                Element nElement = nthElement(n);
+                remove(n);
+                int newN = (int)rand.NextInt64(numElements());
+                elementsSet.Insert(newN, nElement);
+            }
+        }
 
         /**
         * <p> Compara this con otro Objeto, para esto compara si son de la misma
