@@ -168,7 +168,7 @@
                     <Grid x:Name="NotStartedGame" Visibility="{Binding IsNotStartedGame, Converter={StaticResource BooleanToVisibility}}" Margin="0,115,0,0" >
                         <Canvas Height="200" VerticalAlignment="Top">
                             <Label Content="Registrar Jugador" Foreground="White" FontSize="40"/>
-                            <TextBox Text="{Binding PlayerToRegister}" Style="{StaticResource TextBoxStyle}" Margin="0,72,0,0" VerticalAlignment="Top" Width="452"/>
+                            <TextBox Text="{Binding PlayerToRegister}" Style="{StaticResource TextBoxStyle}" Margin="0,72,0,0" VerticalAlignment="Top" Width="452" VerticalContentAlignment="Center"/>
                             <Button Command="{Binding RegisterPlayerCommand}" Background="#FF353434" Width="62" Height="62" Margin="446,73,81,409" BorderBrush="{x:Null}">
                                 <Image Source="../Resources/Images/Buttons/arrow_back.png" RenderTransformOrigin="0.5,0.5" Width="45" Height="45" HorizontalAlignment="Left" Margin="0,0,15,0">
                                     <Image.RenderTransform>
@@ -188,7 +188,7 @@
                         <Button Command="{Binding GeneralGameInformationCommand}" Content="Informacion General   " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="40"  Width="451" Height="75" Background="#FF353434" BorderBrush="{x:Null}" Foreground="White" Margin="0,36,0,0"/>
                         <Canvas Height="200" Margin="0,146,0,198">
                             <Label Content="Puntaje de Jugador" Foreground="White" FontSize="40"/>
-                            <TextBox Text="{Binding PlayerToGetScore}" Style="{StaticResource TextBoxStyle}" Margin="0,72,0,0" VerticalAlignment="Top" Width="452"/>
+                            <TextBox Text="{Binding PlayerToGetScore}" Style="{StaticResource TextBoxStyle}" Margin="0,72,0,0" VerticalAlignment="Top" Width="452" VerticalContentAlignment="Center"/>
                             <Button Command="{Binding GetPlayerScoreCommand}" Background="#FF353434" Width="62" Height="62" Margin="446,73,81,409" BorderBrush="{x:Null}">
                                 <Image Source="../Resources/Images/Buttons/arrow_back.png" RenderTransformOrigin="0.5,0.5" Width="45" Height="45" HorizontalAlignment="Left" Margin="0,0,15,0">
                                     <Image.RenderTransform>

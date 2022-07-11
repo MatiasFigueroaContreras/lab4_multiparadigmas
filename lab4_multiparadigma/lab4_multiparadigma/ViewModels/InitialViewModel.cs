@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace lab4_multiparadigma.ViewModels
@@ -75,6 +76,28 @@ namespace lab4_multiparadigma.ViewModels
         public void NavigateCreatedGames(object? obj)
         {
             _navigationStore.CurrentViewModel = new CreatedGamesViewModel(_navigationStore, _dobbleGameSet);
+        }
+
+        /// <summary>
+        /// Comando que puede ser usado en una vista para delegar la accion al
+        ///     manejador de eventos CloseWindow
+        /// </summary>
+        public ICommand CloseWindowCommand
+        {
+            get
+            {
+                return new RelayCommand(new Action<object>(CloseWindow));
+            }
+        }
+
+        /// <summary>
+        /// Manejador de eventos, encargado de cerrar la ventana.
+        /// </summary>
+        /// <param name="o"></param>
+        public void CloseWindow(object obj)
+        {
+            Window win = (Window)obj;
+            win.Close();
         }
     }
 }

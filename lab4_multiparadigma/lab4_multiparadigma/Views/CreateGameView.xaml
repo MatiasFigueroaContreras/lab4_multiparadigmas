@@ -43,6 +43,7 @@
             <Setter Property="Width" Value="550"/>
             <Setter Property="Height" Value="64"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">

@@ -70,6 +70,6 @@
         <Label x:Name="Tittle" Content="DobbleGame" HorizontalAlignment="Center" Margin="0,179,0,0" VerticalAlignment="Top" Height="146" Width="594" Foreground="#FFECC601" FontSize="100"/>
         <Button Command="{Binding NavigateCreateGameCommand}" Style="{DynamicResource ButtonStyle}" x:Name="NewGame" Content="Juego Nuevo" HorizontalAlignment="Center" Margin="0,470,0,0" VerticalAlignment="Top" Height="110" Width="376" FontSize="60"/>
         <Button Command="{Binding NavigateCreatedGamesCommand}" Style="{DynamicResource ButtonStyle}" x:Name="ContinueGame" Content="Continuar Juego" HorizontalAlignment="Center" Margin="0,585,0,0" VerticalAlignment="Top" Height="110" Width="450" FontSize="60"/>
-        <Button Style="{DynamicResource ButtonStyle}" x:Name="Exit" Content="Salir" HorizontalAlignment="Center" Margin="0,700,0,0" VerticalAlignment="Top" Height="110" Width="186" FontSize="55"/>
+        <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Style="{DynamicResource ButtonStyle}" x:Name="Exit" Content="Salir" HorizontalAlignment="Center" Margin="0,700,0,0" VerticalAlignment="Top" Height="110" Width="186" FontSize="55"/>
     </Grid>
 </UserControl>
