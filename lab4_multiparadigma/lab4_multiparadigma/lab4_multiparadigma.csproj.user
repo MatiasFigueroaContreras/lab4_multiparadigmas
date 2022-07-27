@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Resources\Helpers\CustomMessageBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreatedGamesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,6 +25,12 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Helpers\CustomMessageBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Styles\StylesDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CreatedGamesView.xaml">

@@ -1,4 +1,5 @@
 ﻿using lab4_multiparadigma.Commands;
+using lab4_multiparadigma.Resources.Helpers;
 using lab4_multiparadigma.Stores;
 using model.DobbleGameSpace;
 using model.DobbleGamesSetSpace;
@@ -78,6 +79,8 @@ namespace lab4_multiparadigma.ViewModels
             _dobbleGamesSet = dobbleGamesSet;
             _dobbleGameIndex = dobbleGameIndex;
             _dobbleGame = _dobbleGamesSet.getGame(_dobbleGameIndex);
+            _playerToRegister = "";
+            _playerToGetScore = "";
             _timer = new();
             _timer.Interval = new TimeSpan(0, 0, 1);
             _timer.Tick += updateTimer;
@@ -121,7 +124,18 @@ namespace lab4_multiparadigma.ViewModels
         /// </summary>
         public string? PlayerTurn
         {
-            get { return "Turno de " + _dobbleGame.whoseTurnIsIt(); }
+            get 
+            { 
+                string? playerTurn = _dobbleGame.whoseTurnIsIt();
+                if (playerTurn != null)
+                {
+                    return "Turno de " + playerTurn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         /// <summary>
@@ -360,7 +374,7 @@ namespace lab4_multiparadigma.ViewModels
         /// <param name="o"></param>
         public void RegisteredPlayers(object o)
         {
-            MessageBox.Show("Jugadores Registrados:\n" + _dobbleGame.registeredPlayers());
+            bool? res = new CustomMessageBox(_dobbleGame.registeredPlayers(), "Jugadores Registrados").ShowDialog();
         }
 
         /// <summary>
@@ -412,12 +426,12 @@ namespace lab4_multiparadigma.ViewModels
             try
             {
                 _dobbleGame.register(_playerToRegister);
-                MessageBox.Show("Jugador registrado con exito!!");
+                bool? res = new CustomMessageBox("Jugador registrado con exito!", "").ShowDialog();
                 PlayerToRegister = "";
             }
             catch(DobbleGameException e)
             {
-                MessageBox.Show("Error " + e.Code + ": " + e.Message);
+                bool? res = new CustomMessageBox(e.Message, "Error " + e.Code).ShowDialog();
             }
         }
 
@@ -440,7 +454,7 @@ namespace lab4_multiparadigma.ViewModels
         /// <param name="o"></param>
         public void GeneralGameInformation(object? o)
         {
-            MessageBox.Show(_dobbleGame.ToString());
+            bool? res = new CustomMessageBox(_dobbleGame.ToString(), "Informacion General").ShowDialog();
         }
 
         /// <summary>
@@ -465,12 +479,12 @@ namespace lab4_multiparadigma.ViewModels
             try
             {
                 string score = _dobbleGame.getScore(_playerToGetScore).ToString();
-                MessageBox.Show("El puntaje del jugador " + _playerToGetScore + " es: " + score);
+                bool? res = new CustomMessageBox("El puntaje del jugador " + _playerToGetScore + " es: " + score, "Puntaje").ShowDialog();
                 PlayerToGetScore = "";
             }
             catch (DobbleGameException e)
             {
-                MessageBox.Show("Error " + e.Code + ": " + e.Message);
+                bool? res = new CustomMessageBox(e.Message, "Error " + e.Code).ShowDialog();
             }
         }
 
@@ -500,7 +514,7 @@ namespace lab4_multiparadigma.ViewModels
             }
             catch (DobbleGameException e)
             {
-                MessageBox.Show("Error " + e.Code + ": " + e.Message);
+                bool? res = new CustomMessageBox(e.Message, "Error " + e.Code).ShowDialog();
             }
         }
 
@@ -527,11 +541,11 @@ namespace lab4_multiparadigma.ViewModels
                 _dobbleGame.finish();
                 updateDobbleGameInfo();
                 IsSidePanelVisible = false;
-                MessageBox.Show("Juego terminado, resultados en el menú del juego.");
+                bool? res = new CustomMessageBox("Juego terminado, resultados en el menú del juego.", "Juego Terminado").ShowDialog();
             }
             catch (DobbleGameException e)
             {
-                MessageBox.Show("Error " + e.Code + ": " + e.Message);
+                bool? res = new CustomMessageBox(e.Message, "Error " + e.Code).ShowDialog();
             }
         }
 
@@ -556,11 +570,11 @@ namespace lab4_multiparadigma.ViewModels
         {
             try
             {
-                MessageBox.Show(_dobbleGame.getGameResults()); 
+                bool? res = new CustomMessageBox(_dobbleGame.getGameResults(), "Resultados").ShowDialog();
             }
             catch(DobbleGameException e)
             {
-                MessageBox.Show("Error " + e.Code + ": " + e.Message);
+                bool? res = new CustomMessageBox(e.Message, "Error " + e.Code).ShowDialog();
             }
         }
 
@@ -592,7 +606,7 @@ namespace lab4_multiparadigma.ViewModels
             {
                 if (e.Code == 501)
                 {
-                    MessageBox.Show(e.Message + " resultados en el menú del juego.");
+                    bool? res = new CustomMessageBox(e.Message, "Juego Terminado").ShowDialog();
                 }
                 IsSidePanelVisible = true;
             }

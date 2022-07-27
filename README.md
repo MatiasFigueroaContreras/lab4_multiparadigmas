@@ -1,1 +1,1 @@
-# lab4_20945996_Figueroa
+LAB 4 Paradigmas de Programacion | Paradigma Dirigido por eventos + Orientado a objetos | C# utilizando WPF para la GUI

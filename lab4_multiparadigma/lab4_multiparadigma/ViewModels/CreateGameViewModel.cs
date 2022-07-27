@@ -112,7 +112,7 @@ namespace lab4_multiparadigma.ViewModels
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Debe ingresar un numero entero.");
+                        bool? res = new CustomMessageBox("Debe ingresar un numero entero.", "Error").ShowDialog();
                     }
                 }
             }
@@ -157,7 +157,7 @@ namespace lab4_multiparadigma.ViewModels
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Debe ingresar un numero entero.");
+                        bool? res = new CustomMessageBox("Debe ingresar un numero entero.", "Error").ShowDialog();
                     }
                 }
             }
@@ -185,7 +185,7 @@ namespace lab4_multiparadigma.ViewModels
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Debe ingresar un numero entero.");
+                        bool? res = new CustomMessageBox("Debe ingresar un numero entero.", "Error").ShowDialog();
                     }
                 }
             }
@@ -213,7 +213,7 @@ namespace lab4_multiparadigma.ViewModels
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Debe ingresar un numero.");
+                        bool? res = new CustomMessageBox("Debe ingresar un numero.", "Error").ShowDialog();
                     }
                 }
             }
@@ -241,7 +241,7 @@ namespace lab4_multiparadigma.ViewModels
         {
             if(_numberElements > 8)
             {
-                MessageBox.Show("Numero de elemntos no disponible, se aceptan menores a 8.");
+                bool? res = new CustomMessageBox("Numero de elementos no disponible, se aceptan menores a 8.", "Error").ShowDialog();
             }
             else
             {
@@ -253,19 +253,18 @@ namespace lab4_multiparadigma.ViewModels
                     int i = (int)random.NextInt64(elements.Count - totalCards);
                     List<string> dobbleGameElements = elements.GetRange(i, totalCards);
                     _dobbleGamesSet.add(_gameName, _maxPlayers, _gameMode, dobbleGameElements, _numberElements, _numberCards, _gameTime);
-                    MessageBox.Show("Juego creado con exito!");
+                    bool? res = new CustomMessageBox("Juego creado con exito!", "Estado").ShowDialog();
                     _navigationStore.CurrentViewModel = new DobbleGameViewModel(_navigationStore, _dobbleGamesSet, _dobbleGamesSet.length());
                 }
                 catch (DobbleGamesSetException e)
                 {
                     //Mensaje con errror
-
-                    MessageBox.Show("Error " + e.Code + ": " + e.Message);
+                    bool? res = new CustomMessageBox(e.Message, "Error " + e.Code).ShowDialog();
                 }
                 catch (DobbleGameException e)
                 {
                     //Mensaje con error
-                    MessageBox.Show("Error " + e.Code + ": " + e.Message);
+                    bool? res = new CustomMessageBox(e.Message, "Error " + e.Code).ShowDialog();
                 }
             }
         }

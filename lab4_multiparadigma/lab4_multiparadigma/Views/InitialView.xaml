@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab4_multiparadigma.Views"
         mc:Ignorable="d"
+        Background="#FF050505"
         d:Height="1024" d:Width="1440">
     <UserControl.Resources>
         <Style x:Key="FocusVisual">
@@ -30,11 +31,12 @@
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{StaticResource Button.Static.Foreground}"/>
+            <Setter Property="Foreground" Value="{StaticResource SecondaryTextColor}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="Baskerville Old Face"/>
+            <Setter Property="FontFamily" Value="{StaticResource SecondaryFont}"/>
+            <Setter Property="FontSize" Value="55" />
             <Setter Property="Padding" Value="1"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -49,7 +51,7 @@
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
-                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="FontSize" Value="60"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
@@ -66,10 +68,10 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid Background="#FF050505">
-        <Label x:Name="Tittle" Content="DobbleGame" HorizontalAlignment="Center" Margin="0,179,0,0" VerticalAlignment="Top" Height="146" Width="594" Foreground="#FFECC601" FontSize="100"/>
-        <Button Command="{Binding NavigateCreateGameCommand}" Style="{DynamicResource ButtonStyle}" x:Name="NewGame" Content="Juego Nuevo" HorizontalAlignment="Center" Margin="0,470,0,0" VerticalAlignment="Top" Height="110" Width="376" FontSize="60"/>
-        <Button Command="{Binding NavigateCreatedGamesCommand}" Style="{DynamicResource ButtonStyle}" x:Name="ContinueGame" Content="Continuar Juego" HorizontalAlignment="Center" Margin="0,585,0,0" VerticalAlignment="Top" Height="110" Width="450" FontSize="60"/>
-        <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Style="{DynamicResource ButtonStyle}" x:Name="Exit" Content="Salir" HorizontalAlignment="Center" Margin="0,700,0,0" VerticalAlignment="Top" Height="110" Width="186" FontSize="55"/>
+    <Grid >
+        <Label x:Name="Tittle" Content="DobbleGame" Margin="0,179,0,0" VerticalAlignment="Top" Height="146" Width="672" Style="{StaticResource TittlesStyle}" />
+        <Button Command="{Binding NavigateCreateGameCommand}" Style="{DynamicResource ButtonStyle}" x:Name="NewGame" Content="Juego Nuevo" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button Command="{Binding NavigateCreatedGamesCommand}" Style="{DynamicResource ButtonStyle}" x:Name="ContinueGame" Content="Continuar Juego" HorizontalAlignment="Center" Margin="0,589,0,0" VerticalAlignment="Top" />
+        <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Style="{DynamicResource ButtonStyle}" x:Name="Exit" Content="Salir" HorizontalAlignment="Center" Margin="0,707,0,0" VerticalAlignment="Top" />
     </Grid>
 </UserControl>
